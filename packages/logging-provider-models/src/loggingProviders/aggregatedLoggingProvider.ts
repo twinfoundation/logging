@@ -30,13 +30,24 @@ export class AggregatedLoggingProvider implements ILoggingProvider {
 
 	/**
 	 * Create a new instance of AggregatedLoggingProvider.
+	 * @param dependencies The dependencies for the logging provider.
+	 * @param dependencies.loggingProviders The logging providers to aggregate.
 	 * @param config The configuration for the logging provider.
-	 * @param loggingProviders The logging providers to aggregate.
 	 */
-	constructor(config: ILoggingLevelsConfig | undefined, loggingProviders: ILoggingProvider[]) {
-		Guards.array(AggregatedLoggingProvider._CLASS_NAME, nameof(loggingProviders), loggingProviders);
+	constructor(
+		dependencies: {
+			loggingProviders: ILoggingProvider[];
+		},
+		config: ILoggingLevelsConfig | undefined
+	) {
+		Guards.object(AggregatedLoggingProvider._CLASS_NAME, nameof(dependencies), dependencies);
+		Guards.array(
+			AggregatedLoggingProvider._CLASS_NAME,
+			nameof(dependencies.loggingProviders),
+			dependencies.loggingProviders
+		);
 		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
-		this._loggingProviders = loggingProviders ?? [];
+		this._loggingProviders = dependencies.loggingProviders ?? [];
 	}
 
 	/**

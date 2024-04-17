@@ -7,4 +7,3 @@ export * from "./models/ILogEntry";
 export * from "./models/ILoggingLevelsConfig";
 export * from "./models/ILoggingProvider";
 export * from "./models/logLevel";
-
