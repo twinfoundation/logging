@@ -10,7 +10,7 @@ Class for performing logging operations on multiple providers.
 
 ### constructor
 
-• **new AggregatedLoggingProvider**(`config`, `loggingProviders`): [`AggregatedLoggingProvider`](AggregatedLoggingProvider.md)
+• **new AggregatedLoggingProvider**(`dependencies`, `config`): [`AggregatedLoggingProvider`](AggregatedLoggingProvider.md)
 
 Create a new instance of AggregatedLoggingProvider.
 
@@ -18,8 +18,9 @@ Create a new instance of AggregatedLoggingProvider.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `dependencies` | `Object` | The dependencies for the logging provider. |
+| `dependencies.loggingProviders` | [`ILoggingProvider`](../interfaces/ILoggingProvider.md)[] | The logging providers to aggregate. |
 | `config` | `undefined` \| [`ILoggingLevelsConfig`](../interfaces/ILoggingLevelsConfig.md) | The configuration for the logging provider. |
-| `loggingProviders` | [`ILoggingProvider`](../interfaces/ILoggingProvider.md)[] | The logging providers to aggregate. |
 
 #### Returns
 
