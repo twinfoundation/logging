@@ -1,11 +1,11 @@
 {
-	"name": "@gtsc/logging-provider-models",
+	"name": "@gtsc/logging-provider-memory",
 	"version": "0.0.3-next.3",
-	"description": "Models which define the structure of the logging provider implementations.",
+	"description": "Logging provider implementation using in memory storage.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gtscio/logging.git",
-		"directory": "packages/logging-provider-models"
+		"directory": "packages/logging-provider-memory"
 	},
 	"author": "martyn.janes@iota.org",
 	"license": "Apache-2.0",
@@ -29,14 +29,16 @@
 	"dependencies": {
 		"@gtsc/core": "next",
 		"@gtsc/nameof": "next",
-		"@gtsc/services": "next"
+		"@gtsc/logging-provider-models": "0.0.3-next.3"
 	},
 	"devDependencies": {
 		"@gtsc/nameof-transformer": "next",
 		"@vitest/coverage-v8": "^1.5.0",
 		"copyfiles": "^2.4.1",
+		"dotenv": "^16.4.5",
 		"rimraf": "^5.0.5",
 		"rollup": "^4.14.3",
+		"rollup-plugin-copy": "^3.5.0",
 		"rollup-plugin-typescript2": "^0.36.0",
 		"ts-patch": "^3.1.2",
 		"typedoc": "^0.25.13",

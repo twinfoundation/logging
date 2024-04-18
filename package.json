@@ -1,6 +1,6 @@
 {
 	"name": "@gtsc/logging",
-	"version": "0.0.3-next.2",
+	"version": "0.0.3-next.3",
 	"description": "Logging packages for GTSC",
 	"repository": {
 		"type": "git",
@@ -40,7 +40,8 @@
 	},
 	"workspaces": [
 		"packages/logging-provider-models",
-		"packages/logging-provider-console"
+		"packages/logging-provider-console",
+		"packages/logging-provider-memory"
 	],
 	"type": "module"
 }
