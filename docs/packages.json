@@ -9,6 +9,10 @@
 		{
 			"name": "logging-provider-console",
 			"description": "Logging provider implementation using the console."
+		},
+		{
+			"name": "logging-provider-memory",
+			"description": "Logging provider implementation using in memory storage."
 		}
 	]
 }

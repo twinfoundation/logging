@@ -1,7 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Is } from "@gtsc/core";
+import { Guards, Is } from "@gtsc/core";
 import type { ILogEntry, ILoggingProvider, LogLevel } from "@gtsc/logging-provider-models";
+import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 import type { IConsoleLoggingProviderConfig } from "./models/IConsoleLoggingProviderConfig";
 
@@ -9,6 +10,12 @@ import type { IConsoleLoggingProviderConfig } from "./models/IConsoleLoggingProv
  * Class for performing logging operations in the console.
  */
 export class ConsoleLoggingProvider implements ILoggingProvider {
+	/**
+	 * Runtime name for the class.
+	 * @internal
+	 */
+	private static readonly _CLASS_NAME: string = nameof<ConsoleLoggingProvider>();
+
 	/**
 	 * Colors for highlighting.
 	 * @internal
@@ -45,6 +52,12 @@ export class ConsoleLoggingProvider implements ILoggingProvider {
 	 * @param logEntry The entry to log.
 	 */
 	public log(requestContext: IRequestContext, logEntry: ILogEntry): void {
+		Guards.string(
+			ConsoleLoggingProvider._CLASS_NAME,
+			nameof(requestContext.tenantId),
+			requestContext.tenantId
+		);
+
 		if (this._levels.includes(logEntry.level)) {
 			this.handleGroup(logEntry.source);
 

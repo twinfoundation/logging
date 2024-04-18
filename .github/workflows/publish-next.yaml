@@ -10,6 +10,7 @@ on:
         options:
           - logging-provider-models
           - logging-provider-console
+          - logging-provider-memory
 
 jobs:
   publish:
