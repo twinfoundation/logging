@@ -1,11 +1,11 @@
 {
-	"name": "@gtsc/logging-rest-server",
-	"version": "0.0.3-next.4",
-	"description": "Logging service implementation served as REST endpoints",
+	"name": "@gtsc/logging-service",
+	"version": "0.0.3-next.5",
+	"description": "Logging service implementation and REST endpoint definitions",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gtscio/logging.git",
-		"directory": "packages/logging-rest-server"
+		"directory": "packages/logging-service"
 	},
 	"author": "martyn.janes@iota.org",
 	"license": "Apache-2.0",
@@ -33,7 +33,7 @@
 		"@gtsc/entity": "next",
 		"@gtsc/nameof": "^0.0.4",
 		"@gtsc/services": "next",
-		"@gtsc/logging-models": "0.0.3-next.4",
+		"@gtsc/logging-models": "0.0.3-next.5",
 		"@gtsc/web": "next"
 	},
 	"devDependencies": {

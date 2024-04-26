@@ -15,12 +15,12 @@
 			"description": "Logging connector implementation using in entity storage."
 		},
 		{
-			"name": "logging-rest-client",
-			"description": "Logging service implementation which can connect to REST endpoints."
+			"name": "logging-service",
+			"description": "Logging service implementation and REST endpoint definitions."
 		},
 		{
-			"name": "logging-rest-server",
-			"description": "Logging service implementation served as REST endpoints."
+			"name": "logging-rest-client",
+			"description": "Logging service implementation which can connect to REST endpoints."
 		}
 	]
 }
