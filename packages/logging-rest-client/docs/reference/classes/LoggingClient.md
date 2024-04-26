@@ -1,6 +1,6 @@
 # Class: LoggingClient
 
-Service for performing logging through to REST endpoints.
+Client for performing logging through to REST endpoints.
 
 ## Hierarchy
 
@@ -10,7 +10,7 @@ Service for performing logging through to REST endpoints.
 
 ## Implements
 
-- `ILoggingService`
+- `ILoggingContract`
 
 ## Constructors
 
@@ -109,7 +109,7 @@ An identifier if one was allocated during the logging process.
 
 #### Implementation of
 
-ILoggingService.log
+ILoggingContract.log
 
 ___
 
@@ -144,4 +144,4 @@ NotImplementedError if the implementation does not support retrieval.
 
 #### Implementation of
 
-ILoggingService.query
+ILoggingContract.query

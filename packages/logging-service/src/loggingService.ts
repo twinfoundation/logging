@@ -3,18 +3,23 @@
 import { Guards, Is } from "@gtsc/core";
 import {
 	ComparisonOperator,
-	type EntityCondition,
 	LogicalOperator,
-	SortDirection
+	SortDirection,
+	type EntityCondition
 } from "@gtsc/entity";
-import type { ILogEntry, ILoggingConnector, ILoggingService, LogLevel } from "@gtsc/logging-models";
+import type {
+	ILogEntry,
+	ILoggingConnector,
+	ILoggingContract,
+	LogLevel
+} from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 
 /**
  * Service for performing logging operations to a connector.
  */
-export class LoggingService implements ILoggingService {
+export class LoggingService implements ILoggingContract {
 	/**
 	 * Runtime name for the class.
 	 * @internal
@@ -22,22 +27,24 @@ export class LoggingService implements ILoggingService {
 	private static readonly _CLASS_NAME: string = nameof<LoggingService>();
 
 	/**
-	 * Connectors used by the service.
+	 * Logging connector used by the service.
 	 * @internal
 	 */
-	private readonly _connectors: {
-		logging: ILoggingConnector;
-	};
+	private readonly _loggingConnector: ILoggingConnector;
 
 	/**
 	 * Create a new instance of LoggingService.
-	 * @param connectors The connectors to use.
-	 * @param connectors.logging The logging connector.
+	 * @param dependencies The connectors to use.
+	 * @param dependencies.loggingConnector The logging connector.
 	 */
-	constructor(connectors: { logging: ILoggingConnector }) {
-		Guards.object(LoggingService._CLASS_NAME, nameof(connectors), connectors);
-		Guards.object(LoggingService._CLASS_NAME, nameof(connectors.logging), connectors.logging);
-		this._connectors = connectors;
+	constructor(dependencies: { loggingConnector: ILoggingConnector }) {
+		Guards.object(LoggingService._CLASS_NAME, nameof(dependencies), dependencies);
+		Guards.object(
+			LoggingService._CLASS_NAME,
+			nameof(dependencies.loggingConnector),
+			dependencies.loggingConnector
+		);
+		this._loggingConnector = dependencies.loggingConnector;
 	}
 
 	/**
@@ -57,7 +64,7 @@ export class LoggingService implements ILoggingService {
 			requestContext.tenantId
 		);
 		Guards.object(LoggingService._CLASS_NAME, nameof(logEntry), logEntry);
-		const id = await this._connectors.logging.log(requestContext, logEntry);
+		const id = await this._loggingConnector.log(requestContext, logEntry);
 		return id;
 	}
 
@@ -144,7 +151,7 @@ export class LoggingService implements ILoggingService {
 			});
 		}
 
-		const result = await this._connectors.logging.query(
+		const result = await this._loggingConnector.query(
 			requestContext,
 			condition,
 			[

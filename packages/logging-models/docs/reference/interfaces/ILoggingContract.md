@@ -1,12 +1,12 @@
-# Interface: ILoggingService
+# Interface: ILoggingContract
 
-Interface describing a logging service.
+Interface describing a logging contract.
 
 ## Hierarchy
 
 - `IService`
 
-  ↳ **`ILoggingService`**
+  ↳ **`ILoggingContract`**
 
 ## Methods
 

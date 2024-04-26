@@ -1,6 +1,6 @@
-# @gtsc/logging-service- Overview
+# @gtsc/logging-service Overview
 
-Logging service implementation and REST endpoint definitions.
+Logging contract implementation and REST endpoint definitions.
 
 ## Installation
 

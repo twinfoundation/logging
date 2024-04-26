@@ -1,6 +1,6 @@
 # @gtsc/logging-models - Overview
 
-Models which define the structure of the logging service implementations.
+Models which define the structure of the logging connectors and contracts.
 
 ## Installation
 

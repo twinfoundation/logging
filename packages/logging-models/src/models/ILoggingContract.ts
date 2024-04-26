@@ -5,9 +5,9 @@ import type { ILogEntry } from "./ILogEntry";
 import type { LogLevel } from "./logLevel";
 
 /**
- * Interface describing a logging service.
+ * Interface describing a logging contract.
  */
-export interface ILoggingService extends IService {
+export interface ILoggingContract extends IService {
 	/**
 	 * Log an entry to the service.
 	 * @param requestContext The context for the request.

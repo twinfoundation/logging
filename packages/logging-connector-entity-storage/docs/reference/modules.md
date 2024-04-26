@@ -18,8 +18,8 @@ Configuration for the Entity Storage Logging Connector.
 
 ## Variables
 
-### IEntityLogEntryDescriptor
+### EntityLogEntryDescriptor
 
-• `Const` **IEntityLogEntryDescriptor**: `IEntityDescriptor`\<[`IEntityLogEntry`](interfaces/IEntityLogEntry.md)\>
+• `Const` **EntityLogEntryDescriptor**: `IEntityDescriptor`\<[`IEntityLogEntry`](interfaces/IEntityLogEntry.md)\>
 
 Entity description for a IEntityLogEntry.

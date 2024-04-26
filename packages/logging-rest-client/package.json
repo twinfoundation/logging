@@ -1,7 +1,7 @@
 {
 	"name": "@gtsc/logging-rest-client",
-	"version": "0.0.3-next.5",
-	"description": "Logging service implementation which can connect to REST endpoints",
+	"version": "0.0.3-next.6",
+	"description": "Logging contract implementation which can connect to REST endpoints",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gtscio/logging.git",
@@ -33,7 +33,7 @@
 		"@gtsc/entity": "next",
 		"@gtsc/nameof": "^0.0.4",
 		"@gtsc/services": "next",
-		"@gtsc/logging-models": "0.0.3-next.5"
+		"@gtsc/logging-models": "0.0.3-next.6"
 	},
 	"devDependencies": {
 		"@gtsc/nameof-transformer": "^0.0.4",
