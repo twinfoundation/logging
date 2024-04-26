@@ -16,7 +16,7 @@ The tag to associate with the routes.
 
 ### generateRestRoutes
 
-▸ **generateRestRoutes**(`routeName`, `serviceName`): `IRestRoute`[]
+▸ **generateRestRoutes**(`baseRouteName`, `factoryServiceName`): `IRestRoute`[]
 
 The REST routes for logging.
 
@@ -24,8 +24,8 @@ The REST routes for logging.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `routeName` | `string` | Prefix to prepend to the paths. |
-| `serviceName` | `string` | The name of the service to use in the routes. |
+| `baseRouteName` | `string` | Prefix to prepend to the paths. |
+| `factoryServiceName` | `string` | The name of the service to use in the routes store in the ServiceFactory. |
 
 #### Returns
 
@@ -37,7 +37,7 @@ ___
 
 ### loggingCreate
 
-▸ **loggingCreate**(`requestContext`, `serviceName`, `request`, `body?`): `Promise`\<`ICreatedResponse`\>
+▸ **loggingCreate**(`requestContext`, `factoryServiceName`, `request`, `body?`): `Promise`\<`ICreatedResponse`\>
 
 Create a new log entry.
 
@@ -46,7 +46,7 @@ Create a new log entry.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `requestContext` | `IRequestContext` | The request context for the API. |
-| `serviceName` | `string` | The name of the service to use in the routes. |
+| `factoryServiceName` | `string` | The name of the service to use in the routes. |
 | `request` | `ILoggingCreateRequest` | The request. |
 | `body?` | `unknown` | The body if required for pure content. |
 
@@ -60,7 +60,7 @@ ___
 
 ### loggingList
 
-▸ **loggingList**(`requestContext`, `serviceName`, `request`, `body?`): `Promise`\<`ILoggingListResponse`\>
+▸ **loggingList**(`requestContext`, `factoryServiceName`, `request`, `body?`): `Promise`\<`ILoggingListResponse`\>
 
 Get a list of the logging entries.
 
@@ -69,7 +69,7 @@ Get a list of the logging entries.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `requestContext` | `IRequestContext` | The request context for the API. |
-| `serviceName` | `string` | The name of the service to use in the routes. |
+| `factoryServiceName` | `string` | The name of the service to use in the routes. |
 | `request` | `ILoggingListRequest` | The request. |
 | `body?` | `unknown` | The body if required for pure content. |
 

@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { MemoryEntityStorageConnector } from "@gtsc/entity-storage-connector-memory";
 import { EntityStorageLoggingConnector } from "../src/entityStorageLoggingConnector";
-import { IEntityLogEntryDescriptor } from "../src/models/IEntityLogEntryDescriptor";
+import { EntityLogEntryDescriptor } from "../src/models/entityLogEntryDescriptor";
 
 describe("EntityStorageLoggingConnector", () => {
 	test("can construct", async () => {
-		const memoryEntityStorage = new MemoryEntityStorageConnector(IEntityLogEntryDescriptor);
+		const memoryEntityStorage = new MemoryEntityStorageConnector(EntityLogEntryDescriptor);
 		const logging = new EntityStorageLoggingConnector({
 			entityStorageConnector: memoryEntityStorage
 		});

@@ -9,7 +9,7 @@ import type { IEntityLogEntry } from "./IEntityLogEntry";
  * @returns The descriptor for the IEntityLogEntry.
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const IEntityLogEntryDescriptor: IEntityDescriptor<IEntityLogEntry> = {
+export const EntityLogEntryDescriptor: IEntityDescriptor<IEntityLogEntry> = {
 	name: nameof<IEntityLogEntry>(),
 	properties: [
 		{

@@ -8,19 +8,19 @@ import {
 import { Guards, StringHelper } from "@gtsc/core";
 import type {
 	ILogEntry,
+	ILoggingContract,
 	ILoggingCreateRequest,
 	ILoggingListRequest,
 	ILoggingListResponse,
-	ILoggingService,
 	LogLevel
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 
 /**
- * Service for performing logging through to REST endpoints.
+ * Client for performing logging through to REST endpoints.
  */
-export class LoggingClient extends BaseRestClient implements ILoggingService {
+export class LoggingClient extends BaseRestClient implements ILoggingContract {
 	/**
 	 * Runtime name for the class.
 	 * @internal
@@ -32,7 +32,7 @@ export class LoggingClient extends BaseRestClient implements ILoggingService {
 	 * @param config The configuration for the client.
 	 */
 	constructor(config: IBaseRestClientConfig) {
-		super(LoggingClient._CLASS_NAME, config, StringHelper.kebabCase(nameof<ILoggingService>()));
+		super(LoggingClient._CLASS_NAME, config, StringHelper.kebabCase(nameof<ILoggingContract>()));
 	}
 
 	/**

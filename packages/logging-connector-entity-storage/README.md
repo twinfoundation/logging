@@ -1,6 +1,6 @@
 # GTSC Logging Connector Entity Storage
 
-Logging connector implementation using in entity storage.
+Logging connector implementation using entity storage.
 
 ## Installation
 

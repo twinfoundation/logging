@@ -4,7 +4,7 @@ import { LoggingClient } from "../src/loggingClient";
 
 describe("LoggingClient", () => {
 	test("Can create an instance", async () => {
-		const service = new LoggingClient({ endpoint: "http://localhost:8080" });
-		expect(service).toBeDefined();
+		const client = new LoggingClient({ endpoint: "http://localhost:8080" });
+		expect(client).toBeDefined();
 	});
 });

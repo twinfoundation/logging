@@ -4,13 +4,13 @@ Service for performing logging operations to a connector.
 
 ## Implements
 
-- `ILoggingService`
+- `ILoggingContract`
 
 ## Constructors
 
 ### constructor
 
-• **new LoggingService**(`connectors`): [`LoggingService`](LoggingService.md)
+• **new LoggingService**(`dependencies`): [`LoggingService`](LoggingService.md)
 
 Create a new instance of LoggingService.
 
@@ -18,8 +18,8 @@ Create a new instance of LoggingService.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `connectors` | `Object` | The connectors to use. |
-| `connectors.logging` | `ILoggingConnector` | The logging connector. |
+| `dependencies` | `Object` | The connectors to use. |
+| `dependencies.loggingConnector` | `ILoggingConnector` | The logging connector. |
 
 #### Returns
 
@@ -48,7 +48,7 @@ An identifier if one was allocated during the logging process.
 
 #### Implementation of
 
-ILoggingService.log
+ILoggingContract.log
 
 ___
 
@@ -83,4 +83,4 @@ NotImplementedError if the implementation does not support retrieval.
 
 #### Implementation of
 
-ILoggingService.query
+ILoggingContract.query

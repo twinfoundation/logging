@@ -4,10 +4,10 @@
 import type { ICreatedResponse, IRestRoute, ITag } from "@gtsc/api-models";
 import { Coerce, Guards } from "@gtsc/core";
 import type {
+	ILoggingContract,
 	ILoggingCreateRequest,
 	ILoggingListRequest,
-	ILoggingListResponse,
-	ILoggingService
+	ILoggingListResponse
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import { ServiceFactory, type IRequestContext } from "@gtsc/services";
@@ -24,26 +24,29 @@ const ROUTES_CONTEXT = "loggingRoutes";
 export const tags: ITag[] = [
 	{
 		name: "Logging",
-		description: "Endpoints which are part of the Logging service."
+		description: "Endpoints which are modelled to access a logging contract."
 	}
 ];
 
 /**
  * The REST routes for logging.
- * @param routeName Prefix to prepend to the paths.
- * @param serviceName The name of the service to use in the routes.
+ * @param baseRouteName Prefix to prepend to the paths.
+ * @param factoryServiceName The name of the service to use in the routes store in the ServiceFactory.
  * @returns The generated routes.
  */
-export function generateRestRoutes(routeName: string, serviceName: string): IRestRoute[] {
+export function generateRestRoutes(
+	baseRouteName: string,
+	factoryServiceName: string
+): IRestRoute[] {
 	return [
 		{
 			operationId: "loggingEntryCreate",
 			summary: "Create a log entry",
 			tag: tags[0].name,
 			method: "POST",
-			path: `${routeName}/`,
+			path: `${baseRouteName}/`,
 			handler: async (requestContext, request, body) =>
-				loggingCreate(requestContext, serviceName, request, body),
+				loggingCreate(requestContext, factoryServiceName, request, body),
 			requestType: nameof<ILoggingCreateRequest>(),
 			responseType: [
 				{
@@ -57,9 +60,9 @@ export function generateRestRoutes(routeName: string, serviceName: string): IRes
 			summary: "Get a list of the log entries",
 			tag: tags[0].name,
 			method: "GET",
-			path: `${routeName}/`,
+			path: `${baseRouteName}/`,
 			handler: async (requestContext, request, body) =>
-				loggingList(requestContext, serviceName, request, body),
+				loggingList(requestContext, factoryServiceName, request, body),
 			requestType: nameof<ILoggingListRequest>(),
 			responseType: [
 				{
@@ -74,20 +77,20 @@ export function generateRestRoutes(routeName: string, serviceName: string): IRes
 /**
  * Create a new log entry.
  * @param requestContext The request context for the API.
- * @param serviceName The name of the service to use in the routes.
+ * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
  * @param body The body if required for pure content.
  * @returns The response object with additional http response properties.
  */
 export async function loggingCreate(
 	requestContext: IRequestContext,
-	serviceName: string,
+	factoryServiceName: string,
 	request: ILoggingCreateRequest,
 	body?: unknown
 ): Promise<ICreatedResponse> {
 	Guards.object(ROUTES_CONTEXT, nameof(request.data), request.data);
-	const loggingService = ServiceFactory.get<ILoggingService>(serviceName);
-	const id = await loggingService.log(requestContext, request.data);
+	const service = ServiceFactory.get<ILoggingContract>(factoryServiceName);
+	const id = await service.log(requestContext, request.data);
 	return {
 		statusCode: HttpStatusCodes.CREATED,
 		headers: {
@@ -99,20 +102,20 @@ export async function loggingCreate(
 /**
  * Get a list of the logging entries.
  * @param requestContext The request context for the API.
- * @param serviceName The name of the service to use in the routes.
+ * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
  * @param body The body if required for pure content.
  * @returns The response object with additional http response properties.
  */
 export async function loggingList(
 	requestContext: IRequestContext,
-	serviceName: string,
+	factoryServiceName: string,
 	request: ILoggingListRequest,
 	body?: unknown
 ): Promise<ILoggingListResponse> {
-	const loggingService = ServiceFactory.get<ILoggingService>(serviceName);
+	const service = ServiceFactory.get<ILoggingContract>(factoryServiceName);
 
-	const itemsAndCursor = await loggingService.query(
+	const itemsAndCursor = await service.query(
 		requestContext,
 		request?.query?.level,
 		request?.query?.source,

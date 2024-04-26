@@ -4,7 +4,7 @@
 	"packages": [
 		{
 			"name": "logging-models",
-			"description": "Models which define the structure of the logging connectors and services."
+			"description": "Models which define the structure of the logging connectors and contracts."
 		},
 		{
 			"name": "logging-connector-console",
@@ -12,15 +12,15 @@
 		},
 		{
 			"name": "logging-connector-entity-storage",
-			"description": "Logging connector implementation using in entity storage."
+			"description": "Logging connector implementation using entity storage."
 		},
 		{
 			"name": "logging-service",
-			"description": "Logging service implementation and REST endpoint definitions."
+			"description": "Logging contract implementation and REST endpoint definitions."
 		},
 		{
 			"name": "logging-rest-client",
-			"description": "Logging service implementation which can connect to REST endpoints."
+			"description": "Logging contract implementation which can connect to REST endpoints."
 		}
 	]
 }

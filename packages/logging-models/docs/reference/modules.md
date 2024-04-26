@@ -9,11 +9,11 @@
 
 - [ILogEntry](interfaces/ILogEntry.md)
 - [ILoggingConnector](interfaces/ILoggingConnector.md)
+- [ILoggingContract](interfaces/ILoggingContract.md)
 - [ILoggingCreateRequest](interfaces/ILoggingCreateRequest.md)
 - [ILoggingLevelsConfig](interfaces/ILoggingLevelsConfig.md)
 - [ILoggingListRequest](interfaces/ILoggingListRequest.md)
 - [ILoggingListResponse](interfaces/ILoggingListResponse.md)
-- [ILoggingService](interfaces/ILoggingService.md)
 
 ## Type Aliases
 

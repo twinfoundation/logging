@@ -1,6 +1,6 @@
 # GTSC Logging REST Client
 
-Logging service implementation which can connect to REST endpoints.
+Logging contract implementation which can connect to REST endpoints.
 
 ## Installation
 

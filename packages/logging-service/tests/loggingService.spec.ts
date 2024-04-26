@@ -5,7 +5,7 @@ import { LoggingService } from "../src/loggingService";
 
 describe("LoggingService", () => {
 	test("Can create an instance", async () => {
-		const service = new LoggingService({ logging: {} as unknown as ILoggingConnector });
+		const service = new LoggingService({ loggingConnector: {} as unknown as ILoggingConnector });
 		expect(service).toBeDefined();
 	});
 });
