@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { ConsoleLoggingConnector } from "../src/ConsoleLoggingConnector";
+import { ConsoleLoggingConnector } from "../src/consoleLoggingConnector";
 
 describe("ConsoleLoggingConnector", () => {
 	test("can construct", async () => {
