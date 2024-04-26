@@ -11,7 +11,14 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        package: [logging-provider-models, logging-provider-console, logging-provider-memory]
+        package:
+          [
+            logging-models,
+            logging-connector-console,
+            logging-connector-entity-storage,
+            logging-rest-client,
+            logging-rest-server
+          ]
 
     steps:
       - name: Checkout

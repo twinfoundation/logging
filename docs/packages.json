@@ -3,16 +3,24 @@
 	"label": "Logging",
 	"packages": [
 		{
-			"name": "logging-provider-models",
-			"description": "Models which define the structure of the logging provider implementations."
+			"name": "logging-models",
+			"description": "Models which define the structure of the logging connectors and services."
 		},
 		{
-			"name": "logging-provider-console",
-			"description": "Logging provider implementation using the console."
+			"name": "logging-connector-console",
+			"description": "Logging connector implementation using the console."
 		},
 		{
-			"name": "logging-provider-memory",
-			"description": "Logging provider implementation using in memory storage."
+			"name": "logging-connector-entity-storage",
+			"description": "Logging connector implementation using in entity storage."
+		},
+		{
+			"name": "logging-rest-client",
+			"description": "Logging service implementation which can connect to REST endpoints."
+		},
+		{
+			"name": "logging-rest-server",
+			"description": "Logging service implementation served as REST endpoints."
 		}
 	]
 }
