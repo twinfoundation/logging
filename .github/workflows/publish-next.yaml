@@ -11,8 +11,8 @@ on:
           - logging-models
           - logging-connector-console
           - logging-connector-entity-storage
+          - logging-service
           - logging-rest-client
-          - logging-rest-server
 
 jobs:
   publish:

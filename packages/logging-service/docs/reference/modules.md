@@ -1,4 +1,4 @@
-# @gtsc/logging-rest-server
+# @gtsc/logging-service
 
 ## Classes
 

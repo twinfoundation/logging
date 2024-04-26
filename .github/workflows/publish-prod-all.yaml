@@ -16,8 +16,8 @@ jobs:
             logging-models,
             logging-connector-console,
             logging-connector-entity-storage,
-            logging-rest-client,
-            logging-rest-server
+            logging-service,
+            logging-rest-client
           ]
 
     steps:

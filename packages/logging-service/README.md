@@ -1,11 +1,11 @@
-# GTSC Logging REST Server
+# GTSC Logging Service
 
-Logging service implementation served as REST endpoints.
+Logging service implementation and REST endpoint definitions.
 
 ## Installation
 
 ```shell
-npm install @gtsc/logging-rest-server
+npm install @gtsc/logging-service
 ```
 
 ## Examples

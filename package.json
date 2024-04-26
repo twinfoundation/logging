@@ -1,6 +1,6 @@
 {
 	"name": "@gtsc/logging",
-	"version": "0.0.3-next.4",
+	"version": "0.0.3-next.5",
 	"description": "Logging packages for GTSC",
 	"repository": {
 		"type": "git",
@@ -42,8 +42,8 @@
 		"packages/logging-models",
 		"packages/logging-connector-console",
 		"packages/logging-connector-entity-storage",
-		"packages/logging-rest-client",
-		"packages/logging-rest-server"
+		"packages/logging-service",
+		"packages/logging-rest-client"
 	],
 	"type": "module"
 }
