@@ -46,12 +46,11 @@ export class LoggingClient extends BaseRestClient implements ILoggingContract {
 		logEntry: ILogEntry
 	): Promise<string | undefined> {
 		Guards.object(LoggingClient._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			LoggingClient._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
-
 		const response = await this.fetch<ILoggingCreateRequest, ICreatedResponse>(
 			requestContext,
 			"/",
@@ -104,7 +103,7 @@ export class LoggingClient extends BaseRestClient implements ILoggingContract {
 		totalEntities: number;
 	}> {
 		Guards.object(LoggingClient._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			LoggingClient._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
