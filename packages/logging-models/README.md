@@ -1,6 +1,6 @@
 # GTSC Logging Models
 
-Models which define the structure of the logging connectors and contracts.
+Models which define the structure of the logging contracts and connectors.
 
 ## Installation
 
