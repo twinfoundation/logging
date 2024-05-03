@@ -62,7 +62,7 @@ export class MultiLoggingConnector implements ILoggingConnector {
 		logEntry: ILogEntry
 	): Promise<string | undefined> {
 		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			MultiLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId

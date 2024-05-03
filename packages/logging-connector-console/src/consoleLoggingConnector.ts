@@ -58,7 +58,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		logEntry: ILogEntry
 	): Promise<string | undefined> {
 		Guards.object(ConsoleLoggingConnector._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			ConsoleLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId

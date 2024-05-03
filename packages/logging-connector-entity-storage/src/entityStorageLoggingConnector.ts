@@ -73,7 +73,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 			nameof(requestContext),
 			requestContext
 		);
-		Guards.string(
+		Guards.stringValue(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
@@ -157,7 +157,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 			nameof(requestContext),
 			requestContext
 		);
-		Guards.string(
+		Guards.stringValue(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId

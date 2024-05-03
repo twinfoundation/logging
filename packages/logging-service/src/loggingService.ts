@@ -58,12 +58,13 @@ export class LoggingService implements ILoggingContract {
 		logEntry: ILogEntry
 	): Promise<string | undefined> {
 		Guards.object(LoggingService._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			LoggingService._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
 		Guards.object(LoggingService._CLASS_NAME, nameof(logEntry), logEntry);
+
 		const id = await this._loggingConnector.log(requestContext, logEntry);
 		return id;
 	}
@@ -108,7 +109,7 @@ export class LoggingService implements ILoggingContract {
 		totalEntities: number;
 	}> {
 		Guards.object(LoggingService._CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.string(
+		Guards.stringValue(
 			LoggingService._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
