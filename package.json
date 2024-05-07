@@ -1,7 +1,7 @@
 {
 	"name": "@gtsc/logging",
 	"version": "0.0.3-next.7",
-	"description": "Logging packages for GTSC",
+	"description": "Logging",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/gtscio/logging.git"
