@@ -34,28 +34,28 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * The entity storage for the log entries.
 	 * @internal
 	 */
-	private readonly _entityStorageConnector: IEntityStorageConnector<IEntityLogEntry>;
+	private readonly _logEntryStorage: IEntityStorageConnector<IEntityLogEntry>;
 
 	/**
 	 * Create a new instance of MemoryLoggingConnector.
 	 * @param dependencies The dependencies for the logging connector.
-	 * @param dependencies.entityStorageConnector The entity storage connector dependency.
+	 * @param dependencies.logEntryStorage The entity storage connector dependency.
 	 * @param config The configuration for the logging connector.
 	 */
 	constructor(
 		dependencies: {
-			entityStorageConnector: IEntityStorageConnector<IEntityLogEntry>;
+			logEntryStorage: IEntityStorageConnector<IEntityLogEntry>;
 		},
 		config?: IEntityStorageLoggingConnectorConfig
 	) {
 		Guards.object(EntityStorageLoggingConnector._CLASS_NAME, nameof(dependencies), dependencies);
 		Guards.object(
 			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(dependencies.entityStorageConnector),
-			dependencies.entityStorageConnector
+			nameof(dependencies.logEntryStorage),
+			dependencies.logEntryStorage
 		);
 		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
-		this._entityStorageConnector = dependencies.entityStorageConnector;
+		this._logEntryStorage = dependencies.logEntryStorage;
 	}
 
 	/**
@@ -107,7 +107,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 			id = entity.id;
 
-			await this._entityStorageConnector.set(requestContext, entity);
+			await this._logEntryStorage.set(requestContext, entity);
 		}
 		return id;
 	}
@@ -163,7 +163,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 			requestContext.tenantId
 		);
 
-		const result = await this._entityStorageConnector.query(
+		const result = await this._logEntryStorage.query(
 			requestContext,
 			conditions as EntityCondition<IEntityLogEntry>,
 			sortProperties,

@@ -7,19 +7,14 @@ import {
 	SortDirection,
 	type EntityCondition
 } from "@gtsc/entity";
-import type {
-	ILogEntry,
-	ILoggingConnector,
-	ILoggingContract,
-	LogLevel
-} from "@gtsc/logging-models";
+import type { ILogEntry, ILogging, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 
 /**
  * Service for performing logging operations to a connector.
  */
-export class LoggingService implements ILoggingContract {
+export class LoggingService implements ILogging {
 	/**
 	 * Runtime name for the class.
 	 * @internal

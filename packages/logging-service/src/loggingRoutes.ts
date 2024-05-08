@@ -4,7 +4,7 @@
 import type { ICreatedResponse, IRestRoute, ITag } from "@gtsc/api-models";
 import { Coerce, Guards } from "@gtsc/core";
 import type {
-	ILoggingContract,
+	ILogging,
 	ILoggingCreateRequest,
 	ILoggingListRequest,
 	ILoggingListResponse
@@ -89,7 +89,7 @@ export async function loggingCreate(
 	body?: unknown
 ): Promise<ICreatedResponse> {
 	Guards.object(ROUTES_CONTEXT, nameof(request.data), request.data);
-	const service = ServiceFactory.get<ILoggingContract>(factoryServiceName);
+	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 	const id = await service.log(requestContext, request.data);
 	return {
 		statusCode: HttpStatusCodes.CREATED,
@@ -113,7 +113,7 @@ export async function loggingList(
 	request: ILoggingListRequest,
 	body?: unknown
 ): Promise<ILoggingListResponse> {
-	const service = ServiceFactory.get<ILoggingContract>(factoryServiceName);
+	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 
 	const itemsAndCursor = await service.query(
 		requestContext,
