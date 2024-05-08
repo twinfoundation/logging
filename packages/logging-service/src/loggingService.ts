@@ -7,12 +7,7 @@ import {
 	SortDirection,
 	type EntityCondition
 } from "@gtsc/entity";
-import type {
-	ILogEntry,
-	ILogging,
-	ILoggingConnector,
-	LogLevel
-} from "@gtsc/logging-models";
+import type { ILogEntry, ILogging, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 
