@@ -5,7 +5,7 @@ export * from "./connectors/silentLoggingConnector";
 export * from "./factories/loggingConnectorFactory";
 export * from "./models/ILogEntry";
 export * from "./models/ILoggingConnector";
-export * from "./models/ILoggingContract";
+export * from "./models/ILogging";
 export * from "./models/ILoggingLevelsConfig";
 export * from "./models/api/ILoggingCreateRequest";
 export * from "./models/api/ILoggingListRequest";

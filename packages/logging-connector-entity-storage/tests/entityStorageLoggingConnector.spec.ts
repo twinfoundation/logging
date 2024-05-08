@@ -8,7 +8,7 @@ describe("EntityStorageLoggingConnector", () => {
 	test("can construct", async () => {
 		const memoryEntityStorage = new MemoryEntityStorageConnector(EntityLogEntryDescriptor);
 		const logging = new EntityStorageLoggingConnector({
-			entityStorageConnector: memoryEntityStorage
+			logEntryStorage: memoryEntityStorage
 		});
 		expect(logging).toBeDefined();
 	});
