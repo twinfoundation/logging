@@ -50,24 +50,30 @@ export function generateRestRoutes(
 			type: nameof<ILoggingCreateRequest>(),
 			examples: [
 				{
-					body: {
-						level: "info",
-						message: "This is an information message",
-						source: "source",
-						ts: 1715252922273
+					id: "infoExample",
+					request: {
+						body: {
+							level: "info",
+							message: "This is an information message",
+							source: "source",
+							ts: 1715252922273
+						}
 					}
 				},
 				{
-					body: {
-						level: "info",
-						message: "This is an error message",
-						source: "source",
-						ts: 1715252922273,
-						error: {
-							name: "GeneralError",
-							message: "component.error",
-							properties: {
-								foo: "bar"
+					id: "errorExample",
+					request: {
+						body: {
+							level: "info",
+							message: "This is an error message",
+							source: "source",
+							ts: 1715252922273,
+							error: {
+								name: "GeneralError",
+								message: "component.error",
+								properties: {
+									foo: "bar"
+								}
 							}
 						}
 					}
@@ -94,7 +100,27 @@ export function generateRestRoutes(
 		},
 		responseType: [
 			{
-				type: nameof<ILoggingListResponse>()
+				type: nameof<ILoggingListResponse>(),
+				examples: [
+					{
+						id: "listResponseExample",
+						response: {
+							body: {
+								entities: [
+									{
+										level: "info",
+										message: "This is an information message",
+										source: "source",
+										ts: 1715252922273
+									}
+								],
+								cursor: "1",
+								pageSize: 10,
+								totalEntities: 20
+							}
+						}
+					}
+				]
 			}
 		]
 	};
