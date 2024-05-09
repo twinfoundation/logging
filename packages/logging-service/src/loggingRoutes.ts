@@ -50,24 +50,30 @@ export function generateRestRoutes(
 			type: nameof<ILoggingCreateRequest>(),
 			examples: [
 				{
-					body: {
-						level: "info",
-						message: "This is an information message",
-						source: "source",
-						ts: 1715252922273
+					id: "loggingEntryCreateInfoExample",
+					request: {
+						body: {
+							level: "info",
+							message: "This is an information message",
+							source: "source",
+							ts: 1715252922273
+						}
 					}
 				},
 				{
-					body: {
-						level: "info",
-						message: "This is an error message",
-						source: "source",
-						ts: 1715252922273,
-						error: {
-							name: "GeneralError",
-							message: "component.error",
-							properties: {
-								foo: "bar"
+					id: "loggingEntryCreateErrorExample",
+					request: {
+						body: {
+							level: "info",
+							message: "This is an error message",
+							source: "source",
+							ts: 1715252922273,
+							error: {
+								name: "GeneralError",
+								message: "component.error",
+								properties: {
+									foo: "bar"
+								}
 							}
 						}
 					}
@@ -76,7 +82,18 @@ export function generateRestRoutes(
 		},
 		responseType: [
 			{
-				type: nameof<ICreatedResponse>()
+				type: nameof<ICreatedResponse>(),
+				examples: [
+					{
+						id: "loggingEntryCreateResponseExample",
+						response: {
+							statusCode: HttpStatusCodes.CREATED,
+							headers: {
+								location: "c57d94b088f4c6d2cb32ded014813d0c786aa00134c8ee22f84b1e2545602a70"
+							}
+						}
+					}
+				]
 			}
 		]
 	};
@@ -90,11 +107,41 @@ export function generateRestRoutes(
 		handler: async (requestContext, request, body) =>
 			loggingList(requestContext, factoryServiceName, request, body),
 		requestType: {
-			type: nameof<ILoggingListRequest>()
+			type: nameof<ILoggingListRequest>(),
+			examples: [
+				{
+					id: "loggingListRequestExample",
+					request: {
+						query: {
+							level: "info"
+						}
+					}
+				}
+			]
 		},
 		responseType: [
 			{
-				type: nameof<ILoggingListResponse>()
+				type: nameof<ILoggingListResponse>(),
+				examples: [
+					{
+						id: "listResponseExample",
+						response: {
+							body: {
+								entities: [
+									{
+										level: "info",
+										message: "This is an information message",
+										source: "source",
+										ts: 1715252922273
+									}
+								],
+								cursor: "1",
+								pageSize: 10,
+								totalEntities: 20
+							}
+						}
+					}
+				]
 			}
 		]
 	};
