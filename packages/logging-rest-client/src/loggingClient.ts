@@ -56,7 +56,7 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 			"/",
 			"POST",
 			{
-				data: logEntry
+				body: logEntry
 			}
 		);
 
@@ -125,6 +125,6 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 			}
 		);
 
-		return response.data;
+		return response.body;
 	}
 }

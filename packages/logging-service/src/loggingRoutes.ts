@@ -14,9 +14,9 @@ import { ServiceFactory, type IRequestContext } from "@gtsc/services";
 import { HttpStatusCodes } from "@gtsc/web";
 
 /**
- * The context used when communicating about these routes.
+ * The source used when communicating about these routes.
  */
-const ROUTES_CONTEXT = "loggingRoutes";
+const ROUTES_SOURCE = "loggingRoutes";
 
 /**
  * The tag to associate with the routes.
@@ -38,40 +38,68 @@ export function generateRestRoutes(
 	baseRouteName: string,
 	factoryServiceName: string
 ): IRestRoute[] {
-	return [
-		{
-			operationId: "loggingEntryCreate",
-			summary: "Create a log entry",
-			tag: tags[0].name,
-			method: "POST",
-			path: `${baseRouteName}/`,
-			handler: async (requestContext, request, body) =>
-				loggingCreate(requestContext, factoryServiceName, request, body),
-			requestType: nameof<ILoggingCreateRequest>(),
-			responseType: [
+	const createRoute: IRestRoute<ILoggingCreateRequest, ICreatedResponse> = {
+		operationId: "loggingEntryCreate",
+		summary: "Create a log entry",
+		tag: tags[0].name,
+		method: "POST",
+		path: `${baseRouteName}/`,
+		handler: async (requestContext, request, body) =>
+			loggingCreate(requestContext, factoryServiceName, request, body),
+		requestType: {
+			type: nameof<ILoggingCreateRequest>(),
+			examples: [
 				{
-					type: nameof<ICreatedResponse>(),
-					statusCode: HttpStatusCodes.CREATED
+					body: {
+						level: "info",
+						message: "This is an information message",
+						source: "source",
+						ts: 1715252922273
+					}
+				},
+				{
+					body: {
+						level: "info",
+						message: "This is an error message",
+						source: "source",
+						ts: 1715252922273,
+						error: {
+							name: "GeneralError",
+							message: "component.error",
+							properties: {
+								foo: "bar"
+							}
+						}
+					}
 				}
 			]
 		},
-		{
-			operationId: "loggingListEntries",
-			summary: "Get a list of the log entries",
-			tag: tags[0].name,
-			method: "GET",
-			path: `${baseRouteName}/`,
-			handler: async (requestContext, request, body) =>
-				loggingList(requestContext, factoryServiceName, request, body),
-			requestType: nameof<ILoggingListRequest>(),
-			responseType: [
-				{
-					type: nameof<ILoggingListResponse>(),
-					statusCode: HttpStatusCodes.OK
-				}
-			]
-		}
-	];
+		responseType: [
+			{
+				type: nameof<ICreatedResponse>()
+			}
+		]
+	};
+
+	const listRoute: IRestRoute<ILoggingListRequest, ILoggingListResponse> = {
+		operationId: "loggingListEntries",
+		summary: "Get a list of the log entries",
+		tag: tags[0].name,
+		method: "GET",
+		path: `${baseRouteName}/`,
+		handler: async (requestContext, request, body) =>
+			loggingList(requestContext, factoryServiceName, request, body),
+		requestType: {
+			type: nameof<ILoggingListRequest>()
+		},
+		responseType: [
+			{
+				type: nameof<ILoggingListResponse>()
+			}
+		]
+	};
+
+	return [createRoute, listRoute];
 }
 
 /**
@@ -88,9 +116,9 @@ export async function loggingCreate(
 	request: ILoggingCreateRequest,
 	body?: unknown
 ): Promise<ICreatedResponse> {
-	Guards.object(ROUTES_CONTEXT, nameof(request.data), request.data);
+	Guards.object(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
-	const id = await service.log(requestContext, request.data);
+	const id = await service.log(requestContext, request.body);
 	return {
 		statusCode: HttpStatusCodes.CREATED,
 		headers: {
@@ -125,6 +153,6 @@ export async function loggingList(
 		Coerce.number(request?.query?.pageSize)
 	);
 	return {
-		data: itemsAndCursor
+		body: itemsAndCursor
 	};
 }

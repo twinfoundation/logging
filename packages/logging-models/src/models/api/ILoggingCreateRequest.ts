@@ -9,5 +9,5 @@ export interface ILoggingCreateRequest {
 	/**
 	 * The data to be used in the create.
 	 */
-	data?: ILogEntry;
+	body: ILogEntry;
 }
