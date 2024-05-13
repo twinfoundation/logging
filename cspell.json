@@ -16,6 +16,6 @@
 		".eslintrc.cjs",
 		"**/wordlists/**"
 	],
-	"words": ["gtsc", "nameof", "Stiftung"],
+	"words": ["gtsc", "nameof", "openapi", "Stiftung"],
 	"ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/eslint-disable.*/"]
 }
