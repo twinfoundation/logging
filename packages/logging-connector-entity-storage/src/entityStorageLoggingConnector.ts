@@ -37,7 +37,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	private readonly _logEntryStorage: IEntityStorageConnector<IEntityLogEntry>;
 
 	/**
-	 * Create a new instance of MemoryLoggingConnector.
+	 * Create a new instance of EntityStorageLoggingConnector.
 	 * @param dependencies The dependencies for the logging connector.
 	 * @param dependencies.logEntryStorage The entity storage connector dependency.
 	 * @param config The configuration for the logging connector.
