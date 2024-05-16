@@ -6,7 +6,7 @@ import type { IEntityStorageConnector } from "@gtsc/entity-storage-models";
 import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
-import type { EntityLogEntry } from "./models/entityLogEntry";
+import type { LogEntry } from "./entities/logEntry";
 import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStorageLoggingConnectorConfig";
 
 /**
@@ -34,7 +34,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * The entity storage for the log entries.
 	 * @internal
 	 */
-	private readonly _logEntryStorage: IEntityStorageConnector<EntityLogEntry>;
+	private readonly _logEntryStorage: IEntityStorageConnector<LogEntry>;
 
 	/**
 	 * Create a new instance of EntityStorageLoggingConnector.
@@ -44,7 +44,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 */
 	constructor(
 		dependencies: {
-			logEntryStorage: IEntityStorageConnector<EntityLogEntry>;
+			logEntryStorage: IEntityStorageConnector<LogEntry>;
 		},
 		config?: IEntityStorageLoggingConnectorConfig
 	) {
@@ -91,7 +91,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				dataJson = JSON.stringify(logEntry.data);
 			}
 
-			const entity: EntityLogEntry = {
+			const entity: LogEntry = {
 				id: idUrn.namespaceSpecific(),
 				level: logEntry.level,
 				source: logEntry.source,
@@ -158,7 +158,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 		const result = await this._logEntryStorage.query(
 			requestContext,
-			conditions as EntityCondition<EntityLogEntry>,
+			conditions as EntityCondition<LogEntry>,
 			sortProperties,
 			properties,
 			cursor,

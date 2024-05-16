@@ -1,16 +1,16 @@
-# Class: EntityLogEntry
+# Class: LogEntry
 
-Interface describing a log entry.
+Call defining a log entry.
 
 ## Constructors
 
-### new EntityLogEntry()
+### new LogEntry()
 
-> **new EntityLogEntry**(): [`EntityLogEntry`](EntityLogEntry.md)
+> **new LogEntry**(): [`LogEntry`](LogEntry.md)
 
 #### Returns
 
-[`EntityLogEntry`](EntityLogEntry.md)
+[`LogEntry`](LogEntry.md)
 
 ## Properties
 

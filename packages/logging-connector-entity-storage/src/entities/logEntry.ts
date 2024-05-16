@@ -4,10 +4,10 @@ import { SortDirection, entity, property } from "@gtsc/entity";
 import type { LogLevel } from "@gtsc/logging-models";
 
 /**
- * Interface describing a log entry.
+ * Call defining a log entry.
  */
 @entity()
-export class EntityLogEntry {
+export class LogEntry {
 	/**
 	 * The id.
 	 */
