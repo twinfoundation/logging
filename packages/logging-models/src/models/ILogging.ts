@@ -12,9 +12,9 @@ export interface ILogging extends IService {
 	 * Log an entry to the service.
 	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
-	 * @returns An identifier if one was allocated during the logging process.
+	 * @returns Nothing.
 	 */
-	log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<string | undefined>;
+	log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void>;
 
 	/**
 	 * Query the log entries.

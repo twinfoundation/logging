@@ -1,4 +1,4 @@
-# GTSC / Logging
+# GTSC Logging
 
 This mono-repository contains the packages to use with logging in GTSC applications.
 

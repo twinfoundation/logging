@@ -46,12 +46,9 @@ export class LoggingService implements ILogging {
 	 * Log an entry to the connector.
 	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
-	 * @returns An identifier if one was allocated during the logging process.
+	 * @returns Nothing.
 	 */
-	public async log(
-		requestContext: IRequestContext,
-		logEntry: ILogEntry
-	): Promise<string | undefined> {
+	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
 		Guards.object(LoggingService._CLASS_NAME, nameof(requestContext), requestContext);
 		Guards.stringValue(
 			LoggingService._CLASS_NAME,
@@ -60,8 +57,7 @@ export class LoggingService implements ILogging {
 		);
 		Guards.object(LoggingService._CLASS_NAME, nameof(logEntry), logEntry);
 
-		const id = await this._loggingConnector.log(requestContext, logEntry);
-		return id;
+		await this._loggingConnector.log(requestContext, logEntry);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 
-import type { ICreatedResponse, IRestRoute, ITag } from "@gtsc/api-models";
+import type { INoContentResponse, IRestRoute, ITag } from "@gtsc/api-models";
 import { Coerce, Guards } from "@gtsc/core";
 import type {
 	ILogging,
@@ -11,7 +11,6 @@ import type {
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import { ServiceFactory, type IRequestContext } from "@gtsc/services";
-import { HttpStatusCodes } from "@gtsc/web";
 
 /**
  * The source used when communicating about these routes.
@@ -38,7 +37,7 @@ export function generateRestRoutes(
 	baseRouteName: string,
 	factoryServiceName: string
 ): IRestRoute[] {
-	const createRoute: IRestRoute<ILoggingCreateRequest, ICreatedResponse> = {
+	const createRoute: IRestRoute<ILoggingCreateRequest, void> = {
 		operationId: "loggingEntryCreate",
 		summary: "Create a log entry",
 		tag: tags[0].name,
@@ -82,18 +81,7 @@ export function generateRestRoutes(
 		},
 		responseType: [
 			{
-				type: nameof<ICreatedResponse>(),
-				examples: [
-					{
-						id: "loggingEntryCreateResponseExample",
-						response: {
-							statusCode: HttpStatusCodes.CREATED,
-							headers: {
-								location: "c57d94b088f4c6d2cb32ded014813d0c786aa00134c8ee22f84b1e2545602a70"
-							}
-						}
-					}
-				]
+				type: nameof<INoContentResponse>()
 			}
 		]
 	};
@@ -162,16 +150,10 @@ export async function loggingCreate(
 	factoryServiceName: string,
 	request: ILoggingCreateRequest,
 	body?: unknown
-): Promise<ICreatedResponse> {
+): Promise<void> {
 	Guards.object(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
-	const id = await service.log(requestContext, request.body);
-	return {
-		statusCode: HttpStatusCodes.CREATED,
-		headers: {
-			location: id ?? ""
-		}
-	};
+	await service.log(requestContext, request.body);
 }
 
 /**
