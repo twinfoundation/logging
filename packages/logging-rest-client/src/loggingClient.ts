@@ -1,10 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import {
-	BaseRestClient,
-	type IBaseRestClientConfig,
-	type ICreatedResponse
-} from "@gtsc/api-models";
+import { BaseRestClient, type IBaseRestClientConfig, type IOkResponse } from "@gtsc/api-models";
 import { Guards, StringHelper } from "@gtsc/core";
 import type {
 	ILogEntry,
@@ -39,28 +35,18 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 	 * Log an entry to the connector.
 	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
-	 * @returns An identifier if one was allocated during the logging process.
+	 * @returns Nothing.
 	 */
-	public async log(
-		requestContext: IRequestContext,
-		logEntry: ILogEntry
-	): Promise<string | undefined> {
+	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
 		Guards.object(LoggingClient._CLASS_NAME, nameof(requestContext), requestContext);
 		Guards.stringValue(
 			LoggingClient._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
-		const response = await this.fetch<ILoggingCreateRequest, ICreatedResponse>(
-			requestContext,
-			"/",
-			"POST",
-			{
-				body: logEntry
-			}
-		);
-
-		return response.headers.location;
+		await this.fetch<ILoggingCreateRequest, IOkResponse>(requestContext, "/", "POST", {
+			body: logEntry
+		});
 	}
 
 	/**

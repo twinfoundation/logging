@@ -55,12 +55,9 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * Log an entry to the connector.
 	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
-	 * @returns An identifier if one was allocated during the logging process.
+	 * @returns Nothing.
 	 */
-	public async log(
-		requestContext: IRequestContext,
-		logEntry: ILogEntry
-	): Promise<string | undefined> {
+	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
 		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(requestContext), requestContext);
 		Guards.stringValue(
 			MultiLoggingConnector._CLASS_NAME,
@@ -78,8 +75,6 @@ export class MultiLoggingConnector implements ILoggingConnector {
 				)
 			);
 		}
-
-		return undefined;
 	}
 
 	/**

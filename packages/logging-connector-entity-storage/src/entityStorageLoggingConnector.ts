@@ -6,7 +6,7 @@ import type { IEntityStorageConnector } from "@gtsc/entity-storage-models";
 import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
-import type { IEntityLogEntry } from "./models/IEntityLogEntry";
+import type { EntityLogEntry } from "./models/entityLogEntry";
 import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStorageLoggingConnectorConfig";
 
 /**
@@ -34,7 +34,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * The entity storage for the log entries.
 	 * @internal
 	 */
-	private readonly _logEntryStorage: IEntityStorageConnector<IEntityLogEntry>;
+	private readonly _logEntryStorage: IEntityStorageConnector<EntityLogEntry>;
 
 	/**
 	 * Create a new instance of EntityStorageLoggingConnector.
@@ -44,7 +44,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 */
 	constructor(
 		dependencies: {
-			logEntryStorage: IEntityStorageConnector<IEntityLogEntry>;
+			logEntryStorage: IEntityStorageConnector<EntityLogEntry>;
 		},
 		config?: IEntityStorageLoggingConnectorConfig
 	) {
@@ -62,12 +62,9 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * Log an entry to the connector.
 	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
-	 * @returns An identifier if one was allocated during the logging process.
+	 * @returns Nothing.
 	 */
-	public async log(
-		requestContext: IRequestContext,
-		logEntry: ILogEntry
-	): Promise<string | undefined> {
+	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
 		Guards.object(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(requestContext),
@@ -80,7 +77,6 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		);
 		Guards.object(EntityStorageLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
-		let id: string | undefined;
 		if (this._levels.includes(logEntry.level)) {
 			const idUrn = Urn.generateRandom(EntityStorageLoggingConnector._NAMESPACE);
 
@@ -95,7 +91,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				dataJson = JSON.stringify(logEntry.data);
 			}
 
-			const entity: IEntityLogEntry = {
+			const entity: EntityLogEntry = {
 				id: idUrn.namespaceSpecific(),
 				level: logEntry.level,
 				source: logEntry.source,
@@ -105,11 +101,8 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				data: dataJson
 			};
 
-			id = entity.id;
-
 			await this._logEntryStorage.set(requestContext, entity);
 		}
-		return id;
 	}
 
 	/**
@@ -165,7 +158,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 		const result = await this._logEntryStorage.query(
 			requestContext,
-			conditions as EntityCondition<IEntityLogEntry>,
+			conditions as EntityCondition<EntityLogEntry>,
 			sortProperties,
 			properties,
 			cursor,
