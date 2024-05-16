@@ -20,7 +20,7 @@ Create a new instance of EntityStorageLoggingConnector.
 
 The dependencies for the logging connector.
 
-• **dependencies.logEntryStorage**: `IEntityStorageConnector`\<[`EntityLogEntry`](EntityLogEntry.md)\>
+• **dependencies.logEntryStorage**: `IEntityStorageConnector`\<[`LogEntry`](LogEntry.md)\>
 
 The entity storage connector dependency.
 

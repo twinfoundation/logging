@@ -2,8 +2,8 @@
 
 ## Classes
 
-- [EntityLogEntry](classes/EntityLogEntry.md)
 - [EntityStorageLoggingConnector](classes/EntityStorageLoggingConnector.md)
+- [LogEntry](classes/LogEntry.md)
 
 ## Type Aliases
 
