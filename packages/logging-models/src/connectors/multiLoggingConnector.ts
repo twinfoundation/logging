@@ -58,13 +58,17 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.object<IRequestContext>(
+			MultiLoggingConnector._CLASS_NAME,
+			nameof(requestContext),
+			requestContext
+		);
 		Guards.stringValue(
 			MultiLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
-		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<ILogEntry>(MultiLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			logEntry.ts ??= Date.now();

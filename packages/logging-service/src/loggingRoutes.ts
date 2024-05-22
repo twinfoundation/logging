@@ -151,7 +151,8 @@ export async function loggingCreate(
 	request: ILoggingCreateRequest,
 	body?: unknown
 ): Promise<void> {
-	Guards.object(ROUTES_SOURCE, nameof(request.body), request.body);
+	Guards.object<ILoggingCreateRequest>(ROUTES_SOURCE, nameof(request), request);
+	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 	await service.log(requestContext, request.body);
 }

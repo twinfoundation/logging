@@ -49,7 +49,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		config?: IEntityStorageLoggingConnectorConfig
 	) {
 		Guards.object(EntityStorageLoggingConnector._CLASS_NAME, nameof(dependencies), dependencies);
-		Guards.object(
+		Guards.object<IEntityStorageConnector<LogEntry>>(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(dependencies.logEntryStorage),
 			dependencies.logEntryStorage
@@ -65,7 +65,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object(
+		Guards.object<IRequestContext>(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(requestContext),
 			requestContext
@@ -75,7 +75,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
-		Guards.object(EntityStorageLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<ILogEntry>(EntityStorageLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			const idUrn = Urn.generateRandom(EntityStorageLoggingConnector._NAMESPACE);
@@ -145,7 +145,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object(
+		Guards.object<IRequestContext>(
 			EntityStorageLoggingConnector._CLASS_NAME,
 			nameof(requestContext),
 			requestContext

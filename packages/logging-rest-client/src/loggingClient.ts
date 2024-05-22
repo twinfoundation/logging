@@ -38,7 +38,11 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object(LoggingClient._CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.object<IRequestContext>(
+			LoggingClient._CLASS_NAME,
+			nameof(requestContext),
+			requestContext
+		);
 		Guards.stringValue(
 			LoggingClient._CLASS_NAME,
 			nameof(requestContext.tenantId),
@@ -88,7 +92,11 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object(LoggingClient._CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.object<IRequestContext>(
+			LoggingClient._CLASS_NAME,
+			nameof(requestContext),
+			requestContext
+		);
 		Guards.stringValue(
 			LoggingClient._CLASS_NAME,
 			nameof(requestContext.tenantId),

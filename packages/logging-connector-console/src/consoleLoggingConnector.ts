@@ -54,13 +54,17 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object(ConsoleLoggingConnector._CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.object<IRequestContext>(
+			ConsoleLoggingConnector._CLASS_NAME,
+			nameof(requestContext),
+			requestContext
+		);
 		Guards.stringValue(
 			ConsoleLoggingConnector._CLASS_NAME,
 			nameof(requestContext.tenantId),
 			requestContext.tenantId
 		);
-		Guards.object(ConsoleLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<ILogEntry>(ConsoleLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			this.handleGroup(logEntry.source);
