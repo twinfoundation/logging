@@ -7,7 +7,13 @@ import {
 	SortDirection,
 	type EntityCondition
 } from "@gtsc/entity";
-import type { ILogEntry, ILogging, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
+import {
+	LoggingConnectorFactory,
+	type ILogEntry,
+	type ILogging,
+	type ILoggingConnector,
+	type LogLevel
+} from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 
@@ -29,17 +35,13 @@ export class LoggingService implements ILogging {
 
 	/**
 	 * Create a new instance of LoggingService.
-	 * @param dependencies The connectors to use.
-	 * @param dependencies.loggingConnector The logging connector.
+	 * @param options The options for the connector.
+	 * @param options.loggingConnectorType The type of the logging connector to use, defaults to "logging".
 	 */
-	constructor(dependencies: { loggingConnector: ILoggingConnector }) {
-		Guards.object(LoggingService._CLASS_NAME, nameof(dependencies), dependencies);
-		Guards.object<ILoggingConnector>(
-			LoggingService._CLASS_NAME,
-			nameof(dependencies.loggingConnector),
-			dependencies.loggingConnector
+	constructor(options?: { loggingConnectorType?: string }) {
+		this._loggingConnector = LoggingConnectorFactory.get(
+			options?.loggingConnectorType ?? "logging"
 		);
-		this._loggingConnector = dependencies.loggingConnector;
 	}
 
 	/**

@@ -4,6 +4,7 @@ import { BaseError, Guards, NotImplementedError } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
+import { LoggingConnectorFactory } from "../factories/loggingConnectorFactory";
 import type { ILogEntry } from "../models/ILogEntry";
 import type { ILoggingConnector } from "../models/ILoggingConnector";
 import type { ILoggingLevelsConfig } from "../models/ILoggingLevelsConfig";
@@ -31,24 +32,24 @@ export class MultiLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * Create a new instance of MultiLoggingConnector.
-	 * @param dependencies The dependencies for the logging connector.
-	 * @param dependencies.loggingConnectors The logging connectors to aggregate.
-	 * @param config The configuration for the logging connector.
+	 * @param options The options for the connector.
+	 * @param options.loggingConnectorTypes The logging connectors to multiplex.
+	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(
-		dependencies: {
-			loggingConnectors: ILoggingConnector[];
-		},
-		config?: ILoggingLevelsConfig | undefined
-	) {
-		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(dependencies), dependencies);
-		Guards.array(
+	constructor(options: {
+		loggingConnectorTypes: string[];
+		config?: ILoggingLevelsConfig | undefined;
+	}) {
+		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(options), options);
+		Guards.arrayValue(
 			MultiLoggingConnector._CLASS_NAME,
-			nameof(dependencies.loggingConnectors),
-			dependencies.loggingConnectors
+			nameof(options.loggingConnectorTypes),
+			options.loggingConnectorTypes
 		);
-		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
-		this._loggingConnectors = dependencies.loggingConnectors;
+		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
+		this._loggingConnectors = options.loggingConnectorTypes.map(t =>
+			LoggingConnectorFactory.get(t)
+		);
 	}
 
 	/**
