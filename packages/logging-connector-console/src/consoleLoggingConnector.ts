@@ -171,10 +171,10 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		if (this._lastGroup !== group) {
 			this._lastGroup = group;
 			if (this._lastGroup) {
-				console.groupEnd();
+				globalThis.console.groupEnd();
 			}
 			if (group.length > 0) {
-				console.group(
+				globalThis.console.group(
 					`%c${group}`,
 					`color: #ffffff; background: ${this.stringToColor(
 						group
