@@ -1,8 +1,11 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, Guards, type IError, Is, Urn } from "@gtsc/core";
+import { BaseError, Guards, Is, Urn, type IError } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
-import type { IEntityStorageConnector } from "@gtsc/entity-storage-models";
+import {
+	EntityStorageConnectorFactory,
+	type IEntityStorageConnector
+} from "@gtsc/entity-storage-models";
 import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
@@ -38,24 +41,18 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * Create a new instance of EntityStorageLoggingConnector.
-	 * @param dependencies The dependencies for the logging connector.
-	 * @param dependencies.logEntryStorage The entity storage connector dependency.
-	 * @param config The configuration for the logging connector.
+	 * @param options The options for the connector.
+	 * @param options.logEntryStorageConnectorType The type of the entity storage connector to use, defaults to "logging-entity-storage".
+	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(
-		dependencies: {
-			logEntryStorage: IEntityStorageConnector<LogEntry>;
-		},
-		config?: IEntityStorageLoggingConnectorConfig
-	) {
-		Guards.object(EntityStorageLoggingConnector._CLASS_NAME, nameof(dependencies), dependencies);
-		Guards.object<IEntityStorageConnector<LogEntry>>(
-			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(dependencies.logEntryStorage),
-			dependencies.logEntryStorage
+	constructor(options?: {
+		logEntryStorageConnectorType?: string;
+		config?: IEntityStorageLoggingConnectorConfig;
+	}) {
+		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
+		this._logEntryStorage = EntityStorageConnectorFactory.get(
+			options?.logEntryStorageConnectorType ?? "logging-entity-storage"
 		);
-		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
-		this._logEntryStorage = dependencies.logEntryStorage;
 	}
 
 	/**
