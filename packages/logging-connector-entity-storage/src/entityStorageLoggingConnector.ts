@@ -42,7 +42,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	/**
 	 * Create a new instance of EntityStorageLoggingConnector.
 	 * @param options The options for the connector.
-	 * @param options.logEntryStorageConnectorType The type of the entity storage connector to use, defaults to "logging-entity-storage".
+	 * @param options.logEntryStorageConnectorType The type of the entity storage connector to use, defaults to "log-entry".
 	 * @param options.config The configuration for the logging connector.
 	 */
 	constructor(options?: {
@@ -51,7 +51,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	}) {
 		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
 		this._logEntryStorage = EntityStorageConnectorFactory.get(
-			options?.logEntryStorageConnectorType ?? "logging-entity-storage"
+			options?.logEntryStorageConnectorType ?? "log-entry"
 		);
 	}
 

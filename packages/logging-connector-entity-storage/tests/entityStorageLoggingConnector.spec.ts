@@ -8,15 +8,18 @@ import { LogEntry } from "../src/entities/logEntry";
 import { EntityStorageLoggingConnector } from "../src/entityStorageLoggingConnector";
 
 describe("EntityStorageLoggingConnector", () => {
-	test("can construct", async () => {
+	beforeAll(() => {
 		EntitySchemaFactory.register(nameof<LogEntry>(), () => EntitySchemaHelper.getSchema(LogEntry));
 		EntityStorageConnectorFactory.register(
-			"logging-entity-storage",
+			"log-entry",
 			() =>
 				new MemoryEntityStorageConnector<LogEntry>({
 					entitySchema: nameof<LogEntry>()
 				})
 		);
+	});
+
+	test("can construct", async () => {
 		const logging = new EntityStorageLoggingConnector();
 		expect(logging).toBeDefined();
 	});

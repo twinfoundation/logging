@@ -22,7 +22,7 @@ The options for the connector.
 
 • **options.logEntryStorageConnectorType?**: `string`
 
-The type of the entity storage connector to use, defaults to "logging-entity-storage".
+The type of the entity storage connector to use, defaults to "log-entry".
 
 • **options.config?**: `ILoggingLevelsConfig`
 
