@@ -29,7 +29,7 @@
 	},
 	"dependencies": {
 		"@gtsc/core": "next",
-		"@gtsc/nameof": "^0.0.4",
+		"@gtsc/nameof": "0.0.4",
 		"@gtsc/logging-models": "0.0.3-next.17"
 	},
 	"devDependencies": {
