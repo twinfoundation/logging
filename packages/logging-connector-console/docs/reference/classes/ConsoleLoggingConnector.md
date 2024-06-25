@@ -16,7 +16,7 @@ Create a new instance of ConsoleLoggingConnector.
 
 #### Parameters
 
-• **config?**: `ILoggingLevelsConfig`
+• **config?**: [`IConsoleLoggingConnectorConfig`](../interfaces/IConsoleLoggingConnectorConfig.md)
 
 The configuration for the logging connector.
 
@@ -31,6 +31,14 @@ The configuration for the logging connector.
 > `private` `readonly` **\_levels**: `LogLevel`[]
 
 The log levels to display, will default to all.
+
+***
+
+### \_translateMessages
+
+> `private` `readonly` **\_translateMessages**: `boolean`
+
+Translate messages using the current locale.
 
 ***
 

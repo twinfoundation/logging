@@ -5,4 +5,9 @@ import type { ILoggingLevelsConfig } from "@gtsc/logging-models";
 /**
  * Configuration for the Console Logging Connector.
  */
-export type IConsoleLoggingConnectorConfig = ILoggingLevelsConfig;
+export interface IConsoleLoggingConnectorConfig extends ILoggingLevelsConfig {
+	/**
+	 * Translate message using the current locale.
+	 */
+	translateMessages?: boolean;
+}

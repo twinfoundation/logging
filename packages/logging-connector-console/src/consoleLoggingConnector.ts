@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Guards, Is, NotImplementedError } from "@gtsc/core";
+import { Guards, I18n, Is, NotImplementedError } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
@@ -35,6 +35,11 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	private readonly _levels: LogLevel[];
 
 	/**
+	 * Translate messages using the current locale.
+	 */
+	private readonly _translateMessages: boolean;
+
+	/**
 	 * The last group identity.
 	 */
 	private _lastGroup?: string;
@@ -45,6 +50,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	 */
 	constructor(config?: IConsoleLoggingConnectorConfig) {
 		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
+		this._translateMessages = config?.translateMessages ?? false;
 	}
 
 	/**
@@ -59,11 +65,6 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 			nameof(requestContext),
 			requestContext
 		);
-		Guards.stringValue(
-			ConsoleLoggingConnector._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
 		Guards.object<ILogEntry>(ConsoleLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
@@ -73,15 +74,28 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 			const params: unknown[] = [
 				this.colorize(logEntry.level.toUpperCase(), logEntry.level === "error" ? "red" : "green"),
-				this.colorize(`[${new Date(logEntry.ts).toISOString()}]`, "magenta"),
-				this.colorize(logEntry.message, "cyan")
+				this.colorize(`[${new Date(logEntry.ts).toISOString()}]`, "magenta")
 			];
 
-			if (logEntry.data) {
-				if (Is.object(logEntry.data) || Is.array(logEntry.data)) {
-					params.push(JSON.stringify(logEntry.data));
+			let message = logEntry.message;
+			let data = logEntry.data;
+			if (this._translateMessages) {
+				message = I18n.formatMessage(
+					logEntry.message,
+					data as {
+						[key: string]: unknown;
+					}
+				);
+				data = undefined;
+			}
+
+			params.push(this.colorize(message, "cyan"));
+
+			if (!Is.empty(data)) {
+				if (Is.object(data) || Is.array(data)) {
+					params.push(JSON.stringify(data));
 				} else {
-					params.push(logEntry.data);
+					params.push(data);
 				}
 			}
 
