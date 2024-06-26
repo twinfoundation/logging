@@ -31,16 +31,25 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * The log levels to display, will default to all.
+	 * @internal
 	 */
 	private readonly _levels: LogLevel[];
 
 	/**
 	 * Translate messages using the current locale.
+	 * @internal
 	 */
 	private readonly _translateMessages: boolean;
 
 	/**
+	 * Hide the groups.
+	 * @internal
+	 */
+	private readonly _hideGroups: boolean;
+
+	/**
 	 * The last group identity.
+	 * @internal
 	 */
 	private _lastGroup?: string;
 
@@ -51,6 +60,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	constructor(config?: IConsoleLoggingConnectorConfig) {
 		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
 		this._translateMessages = config?.translateMessages ?? false;
+		this._hideGroups = config?.hideGroups ?? false;
 	}
 
 	/**
@@ -68,7 +78,9 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		Guards.object<ILogEntry>(ConsoleLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
-			this.handleGroup(logEntry.source);
+			if (!this._hideGroups) {
+				this.handleGroup(logEntry.source);
+			}
 
 			logEntry.ts ??= Date.now();
 
@@ -79,7 +91,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 			let message = logEntry.message;
 			let data = logEntry.data;
-			if (this._translateMessages) {
+			if (this._translateMessages && I18n.hasMessage(logEntry.message)) {
 				message = I18n.formatMessage(
 					logEntry.message,
 					data as {
@@ -154,6 +166,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	 * Convert a string to a color.
 	 * @param str The string to convert.
 	 * @returns The color.
+	 * @internal
 	 */
 	private stringToColor(str: string): string {
 		// eslint-disable-next-line no-bitwise
@@ -180,6 +193,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	/**
 	 * Handle a group.
 	 * @param group The group.
+	 * @internal
 	 */
 	private handleGroup(group: string): void {
 		if (this._lastGroup !== group) {

@@ -10,4 +10,9 @@ export interface IConsoleLoggingConnectorConfig extends ILoggingLevelsConfig {
 	 * Translate message using the current locale.
 	 */
 	translateMessages?: boolean;
+
+	/**
+	 * Hide the group display.
+	 */
+	hideGroups?: boolean;
 }
