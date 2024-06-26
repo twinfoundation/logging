@@ -16,6 +16,14 @@ Translate message using the current locale.
 
 ***
 
+### hideGroups?
+
+> `optional` **hideGroups**: `boolean`
+
+Hide the group display.
+
+***
+
 ### levels?
 
 > `optional` **levels**: `LogLevel`[]
