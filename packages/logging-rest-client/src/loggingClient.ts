@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseRestClient, type IBaseRestClientConfig, type IOkResponse } from "@gtsc/api-models";
+import { BaseRestClient } from "@gtsc/api-core";
+import type { IBaseRestClientConfig, IOkResponse } from "@gtsc/api-models";
 import { Guards, StringHelper } from "@gtsc/core";
 import type {
 	ILogEntry,
