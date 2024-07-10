@@ -17,16 +17,15 @@ import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStora
  */
 export class EntityStorageLoggingConnector implements ILoggingConnector {
 	/**
-	 * Runtime name for the class.
-	 * @internal
-	 */
-	private static readonly _CLASS_NAME: string = nameof<EntityStorageLoggingConnector>();
-
-	/**
 	 * The namespace for the entities.
 	 * @internal
 	 */
 	private static readonly _NAMESPACE: string = "entity-logging";
+
+	/**
+	 * Runtime name for the class.
+	 */
+	public readonly CLASS_NAME: string = nameof<EntityStorageLoggingConnector>();
 
 	/**
 	 * The log levels to capture, will default to all.
@@ -62,17 +61,9 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(
-			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
-		Guards.object<ILogEntry>(EntityStorageLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
+		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			const idUrn = Urn.generateRandom(EntityStorageLoggingConnector._NAMESPACE);
@@ -142,16 +133,8 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object<IRequestContext>(
-			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			EntityStorageLoggingConnector._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
 
 		const result = await this._logEntryStorage.query(
 			requestContext,

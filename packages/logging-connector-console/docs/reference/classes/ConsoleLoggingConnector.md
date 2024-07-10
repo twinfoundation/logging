@@ -24,6 +24,18 @@ The configuration for the logging connector.
 
 [`ConsoleLoggingConnector`](ConsoleLoggingConnector.md)
 
+## Properties
+
+### CLASS\_NAME
+
+> `readonly` **CLASS\_NAME**: `string`
+
+Runtime name for the class.
+
+#### Implementation of
+
+`ILoggingConnector.CLASS_NAME`
+
 ## Methods
 
 ### log()

@@ -25,6 +25,11 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 	private static readonly _CLASS_NAME: string = nameof<LoggingClient>();
 
 	/**
+	 * Runtime name for the class.
+	 */
+	public readonly CLASS_NAME: string = LoggingClient._CLASS_NAME;
+
+	/**
 	 * Create a new instance of LoggingClient.
 	 * @param config The configuration for the client.
 	 */

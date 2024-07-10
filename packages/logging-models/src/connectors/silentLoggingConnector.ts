@@ -1,6 +1,7 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
+import { nameof } from "@gtsc/nameof";
 import type { IRequestContext } from "@gtsc/services";
 import type { ILogEntry } from "../models/ILogEntry";
 import type { ILoggingConnector } from "../models/ILoggingConnector";
@@ -9,6 +10,11 @@ import type { ILoggingConnector } from "../models/ILoggingConnector";
  * Class for performing logging operations to nowhere.
  */
 export class SilentLoggingConnector implements ILoggingConnector {
+	/**
+	 * Runtime name for the class.
+	 */
+	public readonly CLASS_NAME: string = nameof<SilentLoggingConnector>();
+
 	/**
 	 * Log an entry to the connector.
 	 * @param requestContext The context for the request.

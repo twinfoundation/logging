@@ -16,9 +16,8 @@ import type { LogLevel } from "../models/logLevel";
 export class MultiLoggingConnector implements ILoggingConnector {
 	/**
 	 * Runtime name for the class.
-	 * @internal
 	 */
-	private static readonly _CLASS_NAME: string = nameof<MultiLoggingConnector>();
+	public readonly CLASS_NAME: string = nameof<MultiLoggingConnector>();
 
 	/**
 	 * The connectors to send the log entries to.
@@ -40,9 +39,9 @@ export class MultiLoggingConnector implements ILoggingConnector {
 		loggingConnectorTypes: string[];
 		config?: ILoggingLevelsConfig | undefined;
 	}) {
-		Guards.object(MultiLoggingConnector._CLASS_NAME, nameof(options), options);
+		Guards.object(this.CLASS_NAME, nameof(options), options);
 		Guards.arrayValue(
-			MultiLoggingConnector._CLASS_NAME,
+			this.CLASS_NAME,
 			nameof(options.loggingConnectorTypes),
 			options.loggingConnectorTypes
 		);
@@ -59,17 +58,9 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(
-			MultiLoggingConnector._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			MultiLoggingConnector._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
-		Guards.object<ILogEntry>(MultiLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
+		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			logEntry.ts ??= Date.now();
@@ -142,6 +133,6 @@ export class MultiLoggingConnector implements ILoggingConnector {
 			}
 		}
 
-		throw new NotImplementedError(MultiLoggingConnector._CLASS_NAME, "query");
+		throw new NotImplementedError(this.CLASS_NAME, "query");
 	}
 }

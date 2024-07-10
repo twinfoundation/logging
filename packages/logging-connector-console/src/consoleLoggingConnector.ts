@@ -12,12 +12,6 @@ import type { IConsoleLoggingConnectorConfig } from "./models/IConsoleLoggingCon
  */
 export class ConsoleLoggingConnector implements ILoggingConnector {
 	/**
-	 * Runtime name for the class.
-	 * @internal
-	 */
-	private static readonly _CLASS_NAME: string = nameof<ConsoleLoggingConnector>();
-
-	/**
 	 * Colors for highlighting.
 	 * @internal
 	 */
@@ -28,6 +22,11 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		magenta: 35,
 		red: 31
 	};
+
+	/**
+	 * Runtime name for the class.
+	 */
+	public readonly CLASS_NAME: string = nameof<ConsoleLoggingConnector>();
 
 	/**
 	 * The log levels to display, will default to all.
@@ -70,12 +69,8 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(
-			ConsoleLoggingConnector._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.object<ILogEntry>(ConsoleLoggingConnector._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			if (!this._hideGroups) {
@@ -159,7 +154,7 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		 */
 		totalEntities: number;
 	}> {
-		throw new NotImplementedError(ConsoleLoggingConnector._CLASS_NAME, "query");
+		throw new NotImplementedError(this.CLASS_NAME, "query");
 	}
 
 	/**

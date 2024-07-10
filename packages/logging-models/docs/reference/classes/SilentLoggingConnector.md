@@ -16,6 +16,18 @@ Class for performing logging operations to nowhere.
 
 [`SilentLoggingConnector`](SilentLoggingConnector.md)
 
+## Properties
+
+### CLASS\_NAME
+
+> `readonly` **CLASS\_NAME**: `string`
+
+Runtime name for the class.
+
+#### Implementation of
+
+[`ILoggingConnector`](../interfaces/ILoggingConnector.md).[`CLASS_NAME`](../interfaces/ILoggingConnector.md#class_name)
+
 ## Methods
 
 ### log()

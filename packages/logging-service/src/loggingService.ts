@@ -23,9 +23,8 @@ import type { IRequestContext } from "@gtsc/services";
 export class LoggingService implements ILogging {
 	/**
 	 * Runtime name for the class.
-	 * @internal
 	 */
-	private static readonly _CLASS_NAME: string = nameof<LoggingService>();
+	public readonly CLASS_NAME: string = nameof<LoggingService>();
 
 	/**
 	 * Logging connector used by the service.
@@ -51,17 +50,9 @@ export class LoggingService implements ILogging {
 	 * @returns Nothing.
 	 */
 	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(
-			LoggingService._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			LoggingService._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
-		Guards.object<ILogEntry>(LoggingService._CLASS_NAME, nameof(logEntry), logEntry);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
+		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		await this._loggingConnector.log(requestContext, logEntry);
 	}
@@ -105,16 +96,8 @@ export class LoggingService implements ILogging {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object<IRequestContext>(
-			LoggingService._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			LoggingService._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
+		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
+		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
 
 		const condition: EntityCondition<ILogEntry> = {
 			conditions: [],

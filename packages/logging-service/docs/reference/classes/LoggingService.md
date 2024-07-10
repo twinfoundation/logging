@@ -28,6 +28,18 @@ The type of the logging connector to use, defaults to "logging".
 
 [`LoggingService`](LoggingService.md)
 
+## Properties
+
+### CLASS\_NAME
+
+> `readonly` **CLASS\_NAME**: `string`
+
+Runtime name for the class.
+
+#### Implementation of
+
+`ILogging.CLASS_NAME`
+
 ## Methods
 
 ### log()

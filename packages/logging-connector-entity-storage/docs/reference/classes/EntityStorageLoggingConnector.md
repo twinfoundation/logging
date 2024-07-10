@@ -34,6 +34,18 @@ The configuration for the logging connector.
 
 ## Properties
 
+### CLASS\_NAME
+
+> `readonly` **CLASS\_NAME**: `string`
+
+Runtime name for the class.
+
+#### Implementation of
+
+`ILoggingConnector.CLASS_NAME`
+
+***
+
 ### \_levels
 
 > `private` `readonly` **\_levels**: `LogLevel`[]
