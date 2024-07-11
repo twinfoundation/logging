@@ -142,14 +142,12 @@ export function generateRestRoutes(
  * @param requestContext The request context for the API.
  * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
- * @param body The body if required for pure content.
  * @returns The response object with additional http response properties.
  */
 export async function loggingCreate(
 	requestContext: IRequestContext,
 	factoryServiceName: string,
-	request: ILoggingCreateRequest,
-	body?: unknown
+	request: ILoggingCreateRequest
 ): Promise<void> {
 	Guards.object<ILoggingCreateRequest>(ROUTES_SOURCE, nameof(request), request);
 	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
@@ -162,14 +160,12 @@ export async function loggingCreate(
  * @param requestContext The request context for the API.
  * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
- * @param body The body if required for pure content.
  * @returns The response object with additional http response properties.
  */
 export async function loggingList(
 	requestContext: IRequestContext,
 	factoryServiceName: string,
-	request: ILoggingListRequest,
-	body?: unknown
+	request: ILoggingListRequest
 ): Promise<ILoggingListResponse> {
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 
