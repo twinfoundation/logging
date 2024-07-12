@@ -87,7 +87,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				data: dataJson
 			};
 
-			await this._logEntryStorage.set(requestContext, entity);
+			await this._logEntryStorage.set(entity, requestContext);
 		}
 	}
 
@@ -132,12 +132,12 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		totalEntities: number;
 	}> {
 		const result = await this._logEntryStorage.query(
-			requestContext,
 			conditions as EntityCondition<LogEntry>,
 			sortProperties,
 			properties,
 			cursor,
-			pageSize
+			pageSize,
+			requestContext
 		);
 
 		const mappedEntities: Partial<ILogEntry>[] = [];
