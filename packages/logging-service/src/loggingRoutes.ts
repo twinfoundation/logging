@@ -1,6 +1,5 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-
 import type { INoContentResponse, IRestRoute, ITag } from "@gtsc/api-models";
 import { Coerce, Guards } from "@gtsc/core";
 import type {
@@ -10,7 +9,7 @@ import type {
 	ILoggingListResponse
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
-import { ServiceFactory, type IRequestContext } from "@gtsc/services";
+import { ServiceFactory, type IServiceRequestContext } from "@gtsc/services";
 
 /**
  * The source used when communicating about these routes.
@@ -37,7 +36,7 @@ export function generateRestRoutes(
 	baseRouteName: string,
 	factoryServiceName: string
 ): IRestRoute[] {
-	const createRoute: IRestRoute<ILoggingCreateRequest, void> = {
+	const createRoute: IRestRoute<ILoggingCreateRequest, INoContentResponse> = {
 		operationId: "loggingEntryCreate",
 		summary: "Create a log entry",
 		tag: tags[0].name,
@@ -145,14 +144,15 @@ export function generateRestRoutes(
  * @returns The response object with additional http response properties.
  */
 export async function loggingCreate(
-	requestContext: IRequestContext,
+	requestContext: IServiceRequestContext,
 	factoryServiceName: string,
 	request: ILoggingCreateRequest
-): Promise<void> {
+): Promise<INoContentResponse> {
 	Guards.object<ILoggingCreateRequest>(ROUTES_SOURCE, nameof(request), request);
 	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
-	await service.log(requestContext, request.body);
+	await service.log(request.body, requestContext);
+	return {};
 }
 
 /**
@@ -163,20 +163,20 @@ export async function loggingCreate(
  * @returns The response object with additional http response properties.
  */
 export async function loggingList(
-	requestContext: IRequestContext,
+	requestContext: IServiceRequestContext,
 	factoryServiceName: string,
 	request: ILoggingListRequest
 ): Promise<ILoggingListResponse> {
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 
 	const itemsAndCursor = await service.query(
-		requestContext,
 		request?.query?.level,
 		request?.query?.source,
 		Coerce.number(request?.query?.timeStart),
 		Coerce.number(request?.query?.timeEnd),
 		request?.query?.cursor,
-		Coerce.number(request?.query?.pageSize)
+		Coerce.number(request?.query?.pageSize),
+		requestContext
 	);
 	return {
 		body: itemsAndCursor

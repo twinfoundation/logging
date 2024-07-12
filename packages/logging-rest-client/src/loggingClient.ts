@@ -12,7 +12,6 @@ import type {
 	LogLevel
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
-import type { IRequestContext } from "@gtsc/services";
 
 /**
  * Client for performing logging through to REST endpoints.
@@ -39,29 +38,19 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 
 	/**
 	 * Log an entry to the connector.
-	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
 	 * @returns Nothing.
 	 */
-	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(
-			LoggingClient._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			LoggingClient._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
-		await this.fetch<ILoggingCreateRequest, IOkResponse>(requestContext, "/", "POST", {
+	public async log(logEntry: ILogEntry): Promise<void> {
+		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
+
+		await this.fetch<ILoggingCreateRequest, IOkResponse>("/", "POST", {
 			body: logEntry
 		});
 	}
 
 	/**
 	 * Query the log entries.
-	 * @param requestContext The context for the request.
 	 * @param level The level of the log entries.
 	 * @param source The source of the log entries.
 	 * @param timeStart The inclusive time as the start of the log entries.
@@ -73,7 +62,6 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
-		requestContext: IRequestContext,
 		level?: LogLevel,
 		source?: string,
 		timeStart?: number,
@@ -98,32 +86,16 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object<IRequestContext>(
-			LoggingClient._CLASS_NAME,
-			nameof(requestContext),
-			requestContext
-		);
-		Guards.stringValue(
-			LoggingClient._CLASS_NAME,
-			nameof(requestContext.tenantId),
-			requestContext.tenantId
-		);
-
-		const response = await this.fetch<ILoggingListRequest, ILoggingListResponse>(
-			requestContext,
-			"/",
-			"GET",
-			{
-				query: {
-					level,
-					source,
-					timeStart,
-					timeEnd,
-					cursor,
-					pageSize
-				}
+		const response = await this.fetch<ILoggingListRequest, ILoggingListResponse>("/", "GET", {
+			query: {
+				level,
+				source,
+				timeStart,
+				timeEnd,
+				cursor,
+				pageSize
 			}
-		);
+		});
 
 		return response.body;
 	}

@@ -64,19 +64,19 @@ The log levels to display, will default to all.
 
 ### log()
 
-> **log**(`requestContext`, `logEntry`): `Promise`\<`void`\>
+> **log**(`logEntry`, `requestContext`?): `Promise`\<`void`\>
 
 Log an entry to the connector.
 
 #### Parameters
 
-• **requestContext**: `IRequestContext`
-
-The context for the request.
-
 • **logEntry**: [`ILogEntry`](../interfaces/ILogEntry.md)
 
 The entry to log.
+
+• **requestContext?**: `IServiceRequestContext`
+
+The context for the request.
 
 #### Returns
 
@@ -92,15 +92,11 @@ Nothing.
 
 ### query()
 
-> **query**(`requestContext`, `conditions`?, `sortProperties`?, `properties`?, `cursor`?, `pageSize`?): `Promise`\<`object`\>
+> **query**(`conditions`?, `sortProperties`?, `properties`?, `cursor`?, `pageSize`?, `requestContext`?): `Promise`\<`object`\>
 
 Query the log entries.
 
 #### Parameters
-
-• **requestContext**: `IRequestContext`
-
-The context for the request.
 
 • **conditions?**: `EntityCondition`\<[`ILogEntry`](../interfaces/ILogEntry.md)\>
 
@@ -121,6 +117,10 @@ The cursor to request the next page of entities.
 • **pageSize?**: `number`
 
 The maximum number of entities in a page.
+
+• **requestContext?**: `IServiceRequestContext`
+
+The context for the request.
 
 #### Returns
 

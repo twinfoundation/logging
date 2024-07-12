@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import { nameof } from "@gtsc/nameof";
-import type { IRequestContext } from "@gtsc/services";
+import type { IServiceRequestContext } from "@gtsc/services";
 import type { ILogEntry } from "../models/ILogEntry";
 import type { ILoggingConnector } from "../models/ILoggingConnector";
 
@@ -17,26 +17,25 @@ export class SilentLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * Log an entry to the connector.
-	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
+	 * @param requestContext The context for the request.
 	 * @returns Nothing.
 	 */
-	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {}
+	public async log(logEntry: ILogEntry, requestContext?: IServiceRequestContext): Promise<void> {}
 
 	/**
 	 * Query the log entries.
-	 * @param requestContext The context for the request.
 	 * @param conditions The conditions to match for the entities.
 	 * @param sortProperties The optional sort order.
 	 * @param properties The optional keys to return, defaults to all.
 	 * @param cursor The cursor to request the next page of entities.
 	 * @param pageSize The maximum number of entities in a page.
+	 * @param requestContext The context for the request.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
 	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
-		requestContext: IRequestContext,
 		conditions?: EntityCondition<ILogEntry>,
 		sortProperties?: {
 			property: keyof ILogEntry;
@@ -44,7 +43,8 @@ export class SilentLoggingConnector implements ILoggingConnector {
 		}[],
 		properties?: (keyof ILogEntry)[],
 		cursor?: string,
-		pageSize?: number
+		pageSize?: number,
+		requestContext?: IServiceRequestContext
 	): Promise<{
 		/**
 		 * The entities, which can be partial if a limited keys list was provided.

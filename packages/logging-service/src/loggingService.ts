@@ -15,7 +15,7 @@ import {
 	type LogLevel
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
-import type { IRequestContext } from "@gtsc/services";
+import type { IServiceRequestContext } from "@gtsc/services";
 
 /**
  * Service for performing logging operations to a connector.
@@ -45,39 +45,37 @@ export class LoggingService implements ILogging {
 
 	/**
 	 * Log an entry to the connector.
-	 * @param requestContext The context for the request.
 	 * @param logEntry The entry to log.
+	 * @param requestContext The context for the request.
 	 * @returns Nothing.
 	 */
-	public async log(requestContext: IRequestContext, logEntry: ILogEntry): Promise<void> {
-		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
+	public async log(logEntry: ILogEntry, requestContext?: IServiceRequestContext): Promise<void> {
 		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
-		await this._loggingConnector.log(requestContext, logEntry);
+		await this._loggingConnector.log(logEntry, requestContext);
 	}
 
 	/**
 	 * Query the log entries.
-	 * @param requestContext The context for the request.
 	 * @param level The level of the log entries.
 	 * @param source The source of the log entries.
 	 * @param timeStart The inclusive time as the start of the log entries.
 	 * @param timeEnd The inclusive time as the end of the log entries.
 	 * @param cursor The cursor to request the next page of entities.
 	 * @param pageSize The maximum number of entities in a page.
+	 * @param requestContext The context for the request.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
 	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
-		requestContext: IRequestContext,
 		level?: LogLevel,
 		source?: string,
 		timeStart?: number,
 		timeEnd?: number,
 		cursor?: string,
-		pageSize?: number
+		pageSize?: number,
+		requestContext?: IServiceRequestContext
 	): Promise<{
 		/**
 		 * The entities, which can be partial if a limited keys list was provided.
@@ -96,9 +94,6 @@ export class LoggingService implements ILogging {
 		 */
 		totalEntities: number;
 	}> {
-		Guards.object<IRequestContext>(this.CLASS_NAME, nameof(requestContext), requestContext);
-		Guards.stringValue(this.CLASS_NAME, nameof(requestContext.tenantId), requestContext.tenantId);
-
 		const condition: EntityCondition<ILogEntry> = {
 			conditions: [],
 			logicalOperator: LogicalOperator.And
@@ -137,7 +132,6 @@ export class LoggingService implements ILogging {
 		}
 
 		const result = await this._loggingConnector.query(
-			requestContext,
 			condition,
 			[
 				{
@@ -147,7 +141,8 @@ export class LoggingService implements ILogging {
 			],
 			undefined,
 			cursor,
-			pageSize
+			pageSize,
+			requestContext
 		);
 
 		return {

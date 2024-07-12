@@ -66,21 +66,17 @@ The endpoint with namespace prefix attached.
 
 ### fetch()
 
-> **fetch**\<`T`, `U`\>(`requestContext`, `route`, `method`, `request`?): `Promise`\<`U`\>
+> **fetch**\<`T`, `U`\>(`route`, `method`, `request`?): `Promise`\<`U`\>
 
 Perform a request in json format.
 
 #### Type parameters
 
-• **T** *extends* `IHttpRequest`\<`unknown`\>
+• **T** *extends* `IHttpRequest`\<`any`\>
 
-• **U** *extends* `IHttpResponse`\<`unknown`\>
+• **U** *extends* `IHttpResponse`\<`any`\>
 
 #### Parameters
-
-• **requestContext**: `IRequestContext`
-
-The context for the request.
 
 • **route**: `string`
 
@@ -108,15 +104,11 @@ The response.
 
 ### log()
 
-> **log**(`requestContext`, `logEntry`): `Promise`\<`void`\>
+> **log**(`logEntry`): `Promise`\<`void`\>
 
 Log an entry to the connector.
 
 #### Parameters
-
-• **requestContext**: `IRequestContext`
-
-The context for the request.
 
 • **logEntry**: `ILogEntry`
 
@@ -136,15 +128,11 @@ Nothing.
 
 ### query()
 
-> **query**(`requestContext`, `level`?, `source`?, `timeStart`?, `timeEnd`?, `cursor`?, `pageSize`?): `Promise`\<`object`\>
+> **query**(`level`?, `source`?, `timeStart`?, `timeEnd`?, `cursor`?, `pageSize`?): `Promise`\<`object`\>
 
 Query the log entries.
 
 #### Parameters
-
-• **requestContext**: `IRequestContext`
-
-The context for the request.
 
 • **level?**: `LogLevel`
 

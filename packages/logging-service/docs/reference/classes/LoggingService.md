@@ -44,19 +44,19 @@ Runtime name for the class.
 
 ### log()
 
-> **log**(`requestContext`, `logEntry`): `Promise`\<`void`\>
+> **log**(`logEntry`, `requestContext`?): `Promise`\<`void`\>
 
 Log an entry to the connector.
 
 #### Parameters
 
-• **requestContext**: `IRequestContext`
-
-The context for the request.
-
 • **logEntry**: `ILogEntry`
 
 The entry to log.
+
+• **requestContext?**: `IServiceRequestContext`
+
+The context for the request.
 
 #### Returns
 
@@ -72,15 +72,11 @@ Nothing.
 
 ### query()
 
-> **query**(`requestContext`, `level`?, `source`?, `timeStart`?, `timeEnd`?, `cursor`?, `pageSize`?): `Promise`\<`object`\>
+> **query**(`level`?, `source`?, `timeStart`?, `timeEnd`?, `cursor`?, `pageSize`?, `requestContext`?): `Promise`\<`object`\>
 
 Query the log entries.
 
 #### Parameters
-
-• **requestContext**: `IRequestContext`
-
-The context for the request.
 
 • **level?**: `LogLevel`
 
@@ -105,6 +101,10 @@ The cursor to request the next page of entities.
 • **pageSize?**: `number`
 
 The maximum number of entities in a page.
+
+• **requestContext?**: `IServiceRequestContext`
+
+The context for the request.
 
 #### Returns
 
