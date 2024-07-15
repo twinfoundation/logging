@@ -83,7 +83,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/LogEntry"
+                                "$ref": "#/components/schemas/LoggingCreateRequest"
                             },
                             "examples": {
                                 "loggingEntryCreateInfoExample": {
@@ -253,16 +253,6 @@
     },
     "components": {
         "schemas": {
-            "HttpStatusCodes": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "Standard HTTP status codes."
-            },
-            "NoContentResponse": {
-                "type": "object",
-                "additionalProperties": false,
-                "description": "The rest request ended in success with no data."
-            },
             "Error": {
                 "type": "object",
                 "properties": {
@@ -297,6 +287,19 @@
                 ],
                 "additionalProperties": false,
                 "description": "Model to describe serialized error."
+            },
+            "LoggingCreateRequest": {
+                "type": "object",
+                "properties": {
+                    "body": {
+                        "$ref": "#/components/schemas/LogEntry"
+                    }
+                },
+                "required": [
+                    "body"
+                ],
+                "additionalProperties": false,
+                "description": "Create a new log entry."
             },
             "LogEntry": {
                 "type": "object",

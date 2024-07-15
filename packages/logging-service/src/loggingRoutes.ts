@@ -10,6 +10,7 @@ import type {
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
 import { ServiceFactory, type IServiceRequestContext } from "@gtsc/services";
+import { HttpStatusCode } from "@gtsc/web";
 
 /**
  * The source used when communicating about these routes.
@@ -152,7 +153,9 @@ export async function loggingCreate(
 	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
 	await service.log(request.body, requestContext);
-	return {};
+	return {
+		statusCode: HttpStatusCode.noContent
+	};
 }
 
 /**
