@@ -1,6 +1,6 @@
-# Function: generateRestRoutes()
+# Function: generateRestRoutesLogging()
 
-> **generateRestRoutes**(`baseRouteName`, `factoryServiceName`): `IRestRoute`[]
+> **generateRestRoutesLogging**(`baseRouteName`, `factoryServiceName`): `IRestRoute`[]
 
 The REST routes for logging.
 

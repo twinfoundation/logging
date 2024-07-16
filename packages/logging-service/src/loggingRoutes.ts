@@ -20,7 +20,7 @@ const ROUTES_SOURCE = "loggingRoutes";
 /**
  * The tag to associate with the routes.
  */
-export const tags: ITag[] = [
+export const tagsLogging: ITag[] = [
 	{
 		name: "Logging",
 		description: "Endpoints which are modelled to access a logging contract."
@@ -33,14 +33,14 @@ export const tags: ITag[] = [
  * @param factoryServiceName The name of the service to use in the routes store in the ServiceFactory.
  * @returns The generated routes.
  */
-export function generateRestRoutes(
+export function generateRestRoutesLogging(
 	baseRouteName: string,
 	factoryServiceName: string
 ): IRestRoute[] {
 	const createRoute: IRestRoute<ILoggingCreateRequest, INoContentResponse> = {
 		operationId: "loggingEntryCreate",
 		summary: "Create a log entry",
-		tag: tags[0].name,
+		tag: tagsLogging[0].name,
 		method: "POST",
 		path: `${baseRouteName}/`,
 		handler: async (requestContext, request) =>
@@ -89,7 +89,7 @@ export function generateRestRoutes(
 	const listRoute: IRestRoute<ILoggingListRequest, ILoggingListResponse> = {
 		operationId: "loggingListEntries",
 		summary: "Get a list of the log entries",
-		tag: tags[0].name,
+		tag: tagsLogging[0].name,
 		method: "GET",
 		path: `${baseRouteName}/`,
 		handler: async (requestContext, request) =>

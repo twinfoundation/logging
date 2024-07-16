@@ -1,15 +1,15 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { EntitySchemaFactory, EntitySchemaHelper } from "@gtsc/entity";
 import { MemoryEntityStorageConnector } from "@gtsc/entity-storage-connector-memory";
 import { EntityStorageConnectorFactory } from "@gtsc/entity-storage-models";
 import { nameof } from "@gtsc/nameof";
-import { LogEntry } from "../src/entities/logEntry";
+import type { LogEntry } from "../src/entities/logEntry";
 import { EntityStorageLoggingConnector } from "../src/entityStorageLoggingConnector";
+import { initSchema } from "../src/schema";
 
 describe("EntityStorageLoggingConnector", () => {
 	beforeAll(() => {
-		EntitySchemaFactory.register(nameof<LogEntry>(), () => EntitySchemaHelper.getSchema(LogEntry));
+		initSchema();
 		EntityStorageConnectorFactory.register(
 			"log-entry",
 			() =>
