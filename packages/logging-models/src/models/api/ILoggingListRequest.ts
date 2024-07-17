@@ -9,7 +9,7 @@ export interface ILoggingListRequest {
 	/**
 	 * The query parameters.
 	 */
-	query?: {
+	query: {
 		/**
 		 * The level of the log entries to retrieve.
 		 */

@@ -83,7 +83,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/LoggingCreateRequest"
+                                "$ref": "#/components/schemas/LogEntry"
                             },
                             "examples": {
                                 "loggingEntryCreateInfoExample": {
@@ -287,19 +287,6 @@
                 ],
                 "additionalProperties": false,
                 "description": "Model to describe serialized error."
-            },
-            "LoggingCreateRequest": {
-                "type": "object",
-                "properties": {
-                    "body": {
-                        "$ref": "#/components/schemas/LogEntry"
-                    }
-                },
-                "required": [
-                    "body"
-                ],
-                "additionalProperties": false,
-                "description": "Create a new log entry."
             },
             "LogEntry": {
                 "type": "object",
