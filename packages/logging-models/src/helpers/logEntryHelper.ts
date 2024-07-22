@@ -14,8 +14,8 @@ export class LogEntryHelper {
 	 * @returns The translated log entry if a translation can be found.
 	 */
 	public static translate(logEntry: ILogEntry): string | undefined {
-		if (Is.stringValue(logEntry.source) && Is.stringValue(logEntry.level)) {
-			const sourceMessage = `${StringHelper.camelCase(logEntry.source)}.${logEntry.level}.${logEntry.message}`;
+		if (Is.stringValue(logEntry.level) && Is.stringValue(logEntry.source)) {
+			const sourceMessage = `${logEntry.level}.${StringHelper.camelCase(logEntry.source)}.${logEntry.message}`;
 			if (I18n.hasMessage(sourceMessage)) {
 				return I18n.formatMessage(
 					sourceMessage,
