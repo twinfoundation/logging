@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Guards, I18n, Is, NotImplementedError } from "@gtsc/core";
+import { Guards, I18n, Is, NotImplementedError, StringHelper } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
@@ -85,14 +85,27 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 			let message = logEntry.message;
 			let data = logEntry.data;
-			if (this._translateMessages && I18n.hasMessage(logEntry.message)) {
-				message = I18n.formatMessage(
-					logEntry.message,
-					data as {
-						[key: string]: unknown;
+			if (this._translateMessages) {
+				if (I18n.hasMessage(logEntry.message)) {
+					message = I18n.formatMessage(
+						logEntry.message,
+						data as {
+							[key: string]: unknown;
+						}
+					);
+					data = undefined;
+				} else if (Is.stringValue(logEntry.source)) {
+					const sourceMessage = `${StringHelper.camelCase(logEntry.source)}.${message}`;
+					if (I18n.hasMessage(sourceMessage)) {
+						message = I18n.formatMessage(
+							sourceMessage,
+							data as {
+								[key: string]: unknown;
+							}
+						);
+						data = undefined;
 					}
-				);
-				data = undefined;
+				}
 			}
 
 			params.push(this.colorize(message, "cyan"));
