@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, Guards, Is, Urn, type IError } from "@gtsc/core";
+import { BaseError, Converter, Guards, Is, RandomHelper, type IError } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import {
 	EntityStorageConnectorFactory,
@@ -64,7 +64,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
-			const idUrn = Urn.generateRandom(EntityStorageLoggingConnector._NAMESPACE);
+			const id = Converter.bytesToHex(RandomHelper.generate(32);
 
 			let errorsJson;
 			if (Is.notEmpty(logEntry.error)) {
@@ -78,7 +78,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 			}
 
 			const entity: LogEntry = {
-				id: idUrn.namespaceSpecific(),
+				id,
 				level: logEntry.level,
 				source: logEntry.source,
 				ts: logEntry.ts ?? Date.now(),
