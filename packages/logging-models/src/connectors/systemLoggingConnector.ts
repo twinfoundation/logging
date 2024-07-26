@@ -31,11 +31,11 @@ export class SystemLoggingConnector implements ILoggingConnector {
 	/**
 	 * Create a new instance of SystemLoggingConnector.
 	 * @param options The options for the server.
-	 * @param options.loggingConnectorType The type of the logging connector to use, if undefined, no logging will happen.
+	 * @param options.loggingConnectorType The type of the logging connector to use, defaults to "logging".
 	 * @param options.systemPartitionId The system partition id to use when logging information.
 	 */
-	constructor(options: { loggingConnectorType: string; systemPartitionId: string }) {
-		this._loggingConnector = LoggingConnectorFactory.get(options.loggingConnectorType);
+	constructor(options: { loggingConnectorType?: string; systemPartitionId: string }) {
+		this._loggingConnector = LoggingConnectorFactory.get(options.loggingConnectorType ?? "logging");
 		this._systemPartitionId = options?.systemPartitionId;
 	}
 
