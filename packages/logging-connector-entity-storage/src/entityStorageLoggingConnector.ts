@@ -64,7 +64,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
-			const id = Converter.bytesToHex(RandomHelper.generate(32);
+			const id = Converter.bytesToHex(RandomHelper.generate(32));
 
 			let errorsJson;
 			if (Is.notEmpty(logEntry.error)) {
