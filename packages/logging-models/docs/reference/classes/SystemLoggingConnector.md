@@ -20,9 +20,9 @@ Create a new instance of SystemLoggingConnector.
 
 The options for the server.
 
-• **options.loggingConnectorType**: `string`
+• **options.loggingConnectorType?**: `string`
 
-The type of the logging connector to use, if undefined, no logging will happen.
+The type of the logging connector to use, defaults to "logging".
 
 • **options.systemPartitionId**: `string`
 
@@ -33,6 +33,14 @@ The system partition id to use when logging information.
 [`SystemLoggingConnector`](SystemLoggingConnector.md)
 
 ## Properties
+
+### NAMESPACE
+
+> `static` `readonly` **NAMESPACE**: `string` = `"system"`
+
+The namespace for the logging connector.
+
+***
 
 ### CLASS\_NAME
 

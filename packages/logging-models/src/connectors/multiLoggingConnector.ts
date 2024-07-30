@@ -15,6 +15,11 @@ import type { LogLevel } from "../models/logLevel";
  */
 export class MultiLoggingConnector implements ILoggingConnector {
 	/**
+	 * The namespace for the logging connector.
+	 */
+	public static readonly NAMESPACE: string = "multi";
+
+	/**
 	 * Runtime name for the class.
 	 */
 	public readonly CLASS_NAME: string = nameof<MultiLoggingConnector>();

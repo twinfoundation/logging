@@ -11,6 +11,11 @@ import type { ILoggingConnector } from "../models/ILoggingConnector";
  */
 export class SilentLoggingConnector implements ILoggingConnector {
 	/**
+	 * The namespace for the logging connector.
+	 */
+	public static readonly NAMESPACE: string = "silent";
+
+	/**
 	 * Runtime name for the class.
 	 */
 	public readonly CLASS_NAME: string = nameof<SilentLoggingConnector>();

@@ -18,6 +18,14 @@ Class for performing logging operations to nowhere.
 
 ## Properties
 
+### NAMESPACE
+
+> `static` `readonly` **NAMESPACE**: `string` = `"silent"`
+
+The namespace for the logging connector.
+
+***
+
 ### CLASS\_NAME
 
 > `readonly` **CLASS\_NAME**: `string`

@@ -17,6 +17,11 @@ import type { IConsoleLoggingConnectorConfig } from "./models/IConsoleLoggingCon
  */
 export class ConsoleLoggingConnector implements ILoggingConnector {
 	/**
+	 * The namespace for the logging connector.
+	 */
+	public static readonly NAMESPACE: string = "console";
+
+	/**
 	 * Colors for highlighting.
 	 * @internal
 	 */

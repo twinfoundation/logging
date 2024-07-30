@@ -34,6 +34,14 @@ The configuration for the logging connector.
 
 ## Properties
 
+### NAMESPACE
+
+> `static` `readonly` **NAMESPACE**: `string` = `"entity-storage"`
+
+The namespace for the logging connector.
+
+***
+
 ### CLASS\_NAME
 
 > `readonly` **CLASS\_NAME**: `string`

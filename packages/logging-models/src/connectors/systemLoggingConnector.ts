@@ -12,6 +12,11 @@ import type { ILoggingConnector } from "../models/ILoggingConnector";
  */
 export class SystemLoggingConnector implements ILoggingConnector {
 	/**
+	 * The namespace for the logging connector.
+	 */
+	public static readonly NAMESPACE: string = "system";
+
+	/**
 	 * Runtime name for the class.
 	 */
 	public readonly CLASS_NAME: string = nameof<SystemLoggingConnector>();

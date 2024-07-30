@@ -17,10 +17,9 @@ import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStora
  */
 export class EntityStorageLoggingConnector implements ILoggingConnector {
 	/**
-	 * The namespace for the entities.
-	 * @internal
+	 * The namespace for the logging connector.
 	 */
-	private static readonly _NAMESPACE: string = "entity-logging";
+	public static readonly NAMESPACE: string = "entity-storage";
 
 	/**
 	 * Runtime name for the class.
