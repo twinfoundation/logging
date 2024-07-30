@@ -310,6 +310,8 @@
                         "$ref": "#/components/schemas/Error"
                     },
                     "data": {
+                        "type": "object",
+                        "additionalProperties": {},
                         "description": "Optional data for the message."
                     }
                 },

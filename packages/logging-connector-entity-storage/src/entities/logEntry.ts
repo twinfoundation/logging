@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { SortDirection, entity, property } from "@gtsc/entity";
 import type { LogLevel } from "@gtsc/logging-models";
+import type { LogEntryError } from "./logEntryError";
 
 /**
  * Call defining a log entry.
@@ -39,14 +40,14 @@ export class LogEntry {
 	public message!: string;
 
 	/**
-	 * JSON version of flattened error array.
+	 * Associated error data.
 	 */
-	@property({ type: "string" })
-	public error?: string;
+	@property({ type: "array", itemType: "object", itemTypeRef: "LogEntryError" })
+	public error?: LogEntryError[];
 
 	/**
-	 * JSON data for the message.
+	 * Data for the message.
 	 */
-	@property({ type: "string" })
-	public data?: string;
+	@property({ type: "object" })
+	public data?: { [key: string]: unknown };
 }

@@ -69,7 +69,7 @@ export class SystemLoggingConnector implements ILoggingConnector {
 	public async query(
 		conditions?: EntityCondition<ILogEntry>,
 		sortProperties?: {
-			property: keyof ILogEntry;
+			property: keyof Omit<ILogEntry, "error" | "data">;
 			sortDirection: SortDirection;
 		}[],
 		properties?: (keyof ILogEntry)[],

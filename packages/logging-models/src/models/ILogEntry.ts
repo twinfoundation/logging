@@ -35,5 +35,5 @@ export interface ILogEntry {
 	/**
 	 * Optional data for the message.
 	 */
-	data?: unknown;
+	data?: { [key: string]: unknown };
 }

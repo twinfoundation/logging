@@ -94,7 +94,7 @@ export class LoggingService implements ILogging {
 		 */
 		totalEntities: number;
 	}> {
-		const condition: EntityCondition<ILogEntry> = {
+		const condition: EntityCondition<Omit<ILogEntry, "error" | "data">> = {
 			conditions: [],
 			logicalOperator: LogicalOperator.And
 		};

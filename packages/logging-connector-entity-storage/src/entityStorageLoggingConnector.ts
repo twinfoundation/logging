@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, Converter, Guards, Is, RandomHelper, type IError } from "@gtsc/core";
+import { BaseError, Converter, Guards, RandomHelper } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import {
 	EntityStorageConnectorFactory,
@@ -65,25 +65,14 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		if (this._levels.includes(logEntry.level)) {
 			const id = Converter.bytesToHex(RandomHelper.generate(32));
 
-			let errorsJson;
-			if (Is.notEmpty(logEntry.error)) {
-				const flattened = BaseError.flatten(logEntry.error);
-				errorsJson = JSON.stringify(flattened);
-			}
-
-			let dataJson;
-			if (Is.notEmpty(logEntry.data)) {
-				dataJson = JSON.stringify(logEntry.data);
-			}
-
 			const entity: LogEntry = {
 				id,
 				level: logEntry.level,
 				source: logEntry.source,
 				ts: logEntry.ts ?? Date.now(),
 				message: logEntry.message,
-				error: errorsJson,
-				data: dataJson
+				error: BaseError.flatten(logEntry.error),
+				data: logEntry.data
 			};
 
 			await this._logEntryStorage.set(entity, requestContext);
@@ -105,7 +94,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	public async query(
 		conditions?: EntityCondition<ILogEntry>,
 		sortProperties?: {
-			property: keyof ILogEntry;
+			property: keyof Omit<ILogEntry, "error" | "data">;
 			sortDirection: SortDirection;
 		}[],
 		properties?: (keyof ILogEntry)[],
@@ -142,15 +131,13 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		const mappedEntities: Partial<ILogEntry>[] = [];
 
 		for (const entity of result.entities) {
-			const errors: IError[] = Is.stringValue(entity.error) ? JSON.parse(entity.error) : undefined;
-
 			mappedEntities.push({
 				level: entity.level,
 				source: entity.source,
 				ts: entity.ts,
 				message: entity.message,
-				error: BaseError.expand(errors),
-				data: Is.stringValue(entity.data) ? JSON.parse(entity.data) : undefined
+				error: BaseError.expand(entity.error),
+				data: entity.data
 			});
 		}
 
