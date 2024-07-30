@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, Converter, Guards, RandomHelper } from "@gtsc/core";
+import { BaseError, Converter, Guards, type IError, Is, RandomHelper } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import {
 	EntityStorageConnectorFactory,
@@ -10,6 +10,7 @@ import type { ILogEntry, ILoggingConnector, LogLevel } from "@gtsc/logging-model
 import { nameof } from "@gtsc/nameof";
 import type { IServiceRequestContext } from "@gtsc/services";
 import type { LogEntry } from "./entities/logEntry";
+import type { LogEntryError } from "./entities/logEntryError";
 import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStorageLoggingConnectorConfig";
 
 /**
@@ -71,7 +72,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				source: logEntry.source,
 				ts: logEntry.ts ?? Date.now(),
 				message: logEntry.message,
-				error: BaseError.flatten(logEntry.error),
+				error: Is.object<IError>(logEntry.error) ? BaseError.flatten(logEntry.error) : undefined,
 				data: logEntry.data
 			};
 
@@ -136,7 +137,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				source: entity.source,
 				ts: entity.ts,
 				message: entity.message,
-				error: BaseError.expand(entity.error),
+				error: Is.object<LogEntryError>(entity.error) ? BaseError.expand(entity.error) : undefined,
 				data: entity.data
 			});
 		}
