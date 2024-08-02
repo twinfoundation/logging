@@ -3,7 +3,6 @@
 import { BaseError, Guards, NotImplementedError } from "@gtsc/core";
 import type { EntityCondition, SortDirection } from "@gtsc/entity";
 import { nameof } from "@gtsc/nameof";
-import type { IServiceRequestContext } from "@gtsc/services";
 import { LoggingConnectorFactory } from "../factories/loggingConnectorFactory";
 import type { ILogEntry } from "../models/ILogEntry";
 import type { ILoggingConnector } from "../models/ILoggingConnector";
@@ -59,19 +58,16 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	/**
 	 * Log an entry to the connector.
 	 * @param logEntry The entry to log.
-	 * @param requestContext The context for the request.
 	 * @returns Nothing.
 	 */
-	public async log(logEntry: ILogEntry, requestContext?: IServiceRequestContext): Promise<void> {
+	public async log(logEntry: ILogEntry): Promise<void> {
 		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
 			logEntry.ts ??= Date.now();
 
 			await Promise.allSettled(
-				this._loggingConnectors.map(async loggingConnector =>
-					loggingConnector.log(logEntry, requestContext)
-				)
+				this._loggingConnectors.map(async loggingConnector => loggingConnector.log(logEntry))
 			);
 		}
 	}
@@ -83,7 +79,6 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * @param properties The optional keys to return, defaults to all.
 	 * @param cursor The cursor to request the next page of entities.
 	 * @param pageSize The maximum number of entities in a page.
-	 * @param requestContext The context for the request.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
 	 * @throws NotImplementedError if the implementation does not support retrieval.
@@ -96,8 +91,7 @@ export class MultiLoggingConnector implements ILoggingConnector {
 		}[],
 		properties?: (keyof ILogEntry)[],
 		cursor?: string,
-		pageSize?: number,
-		requestContext?: IServiceRequestContext
+		pageSize?: number
 	): Promise<{
 		/**
 		 * The entities, which can be partial if a limited keys list was provided.
@@ -125,8 +119,7 @@ export class MultiLoggingConnector implements ILoggingConnector {
 					sortProperties,
 					properties,
 					cursor,
-					pageSize,
-					requestContext
+					pageSize
 				);
 				return result;
 			} catch (error) {

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0.
 export * from "./connectors/multiLoggingConnector";
 export * from "./connectors/silentLoggingConnector";
-export * from "./connectors/systemLoggingConnector";
 export * from "./factories/loggingConnectorFactory";
 export * from "./helpers/logEntryHelper";
 export * from "./models/api/ILoggingCreateRequest";

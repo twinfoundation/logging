@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { INoContentResponse, IRestRoute, ITag } from "@gtsc/api-models";
+import type { IHttpRequestContext, INoContentResponse, IRestRoute, ITag } from "@gtsc/api-models";
 import { Coerce, Guards } from "@gtsc/core";
 import type {
 	ILogging,
@@ -9,7 +9,7 @@ import type {
 	ILoggingListResponse
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
-import { ServiceFactory, type IServiceRequestContext } from "@gtsc/services";
+import { ServiceFactory } from "@gtsc/services";
 import { HttpStatusCode } from "@gtsc/web";
 
 /**
@@ -139,20 +139,20 @@ export function generateRestRoutesLogging(
 
 /**
  * Create a new log entry.
- * @param requestContext The request context for the API.
+ * @param httpRequestContext The request context for the API.
  * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
  * @returns The response object with additional http response properties.
  */
 export async function loggingCreate(
-	requestContext: IServiceRequestContext,
+	httpRequestContext: IHttpRequestContext,
 	factoryServiceName: string,
 	request: ILoggingCreateRequest
 ): Promise<INoContentResponse> {
 	Guards.object<ILoggingCreateRequest>(ROUTES_SOURCE, nameof(request), request);
 	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
 	const service = ServiceFactory.get<ILogging>(factoryServiceName);
-	await service.log(request.body, requestContext);
+	await service.log(request.body);
 	return {
 		statusCode: HttpStatusCode.noContent
 	};
@@ -160,13 +160,13 @@ export async function loggingCreate(
 
 /**
  * Get a list of the logging entries.
- * @param requestContext The request context for the API.
+ * @param httpRequestContext The request context for the API.
  * @param factoryServiceName The name of the service to use in the routes.
  * @param request The request.
  * @returns The response object with additional http response properties.
  */
 export async function loggingList(
-	requestContext: IServiceRequestContext,
+	httpRequestContext: IHttpRequestContext,
 	factoryServiceName: string,
 	request: ILoggingListRequest
 ): Promise<ILoggingListResponse> {
@@ -178,8 +178,7 @@ export async function loggingList(
 		Coerce.number(request?.query?.timeStart),
 		Coerce.number(request?.query?.timeEnd),
 		request?.query?.cursor,
-		Coerce.number(request?.query?.pageSize),
-		requestContext
+		Coerce.number(request?.query?.pageSize)
 	);
 	return {
 		body: itemsAndCursor

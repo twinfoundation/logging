@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IService, IServiceRequestContext } from "@gtsc/services";
+import type { IService } from "@gtsc/services";
 import type { ILogEntry } from "./ILogEntry";
 import type { LogLevel } from "./logLevel";
 
@@ -11,10 +11,9 @@ export interface ILogging extends IService {
 	/**
 	 * Log an entry to the service.
 	 * @param logEntry The entry to log.
-	 * @param requestContext The context for the request.
 	 * @returns Nothing.
 	 */
-	log(logEntry: ILogEntry, requestContext?: IServiceRequestContext): Promise<void>;
+	log(logEntry: ILogEntry): Promise<void>;
 
 	/**
 	 * Query the log entries.
@@ -24,7 +23,6 @@ export interface ILogging extends IService {
 	 * @param timeEnd The inclusive time as the end of the log entries.
 	 * @param cursor The cursor to request the next page of entities.
 	 * @param pageSize The maximum number of entities in a page.
-	 * @param requestContext The context for the request.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
 	 * @throws NotImplementedError if the implementation does not support retrieval.
@@ -35,8 +33,7 @@ export interface ILogging extends IService {
 		timeStart?: number,
 		timeEnd?: number,
 		cursor?: string,
-		pageSize?: number,
-		requestContext?: IServiceRequestContext
+		pageSize?: number
 	): Promise<{
 		/**
 		 * The entities, which can be partial if a limited keys list was provided.
