@@ -43,8 +43,8 @@ export function generateRestRoutesLogging(
 		tag: tagsLogging[0].name,
 		method: "POST",
 		path: `${baseRouteName}/`,
-		handler: async (requestContext, request) =>
-			loggingCreate(requestContext, factoryServiceName, request),
+		handler: async (httpRequestContext, request) =>
+			loggingCreate(httpRequestContext, factoryServiceName, request),
 		requestType: {
 			type: nameof<ILoggingCreateRequest>(),
 			examples: [
@@ -92,8 +92,8 @@ export function generateRestRoutesLogging(
 		tag: tagsLogging[0].name,
 		method: "GET",
 		path: `${baseRouteName}/`,
-		handler: async (requestContext, request) =>
-			loggingList(requestContext, factoryServiceName, request),
+		handler: async (httpRequestContext, request) =>
+			loggingList(httpRequestContext, factoryServiceName, request),
 		requestType: {
 			type: nameof<ILoggingListRequest>(),
 			examples: [
