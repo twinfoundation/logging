@@ -132,7 +132,9 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 				source: entity.source,
 				ts: entity.ts,
 				message: entity.message,
-				error: Is.object<LogEntryError>(entity.error) ? BaseError.expand(entity.error) : undefined,
+				error: Is.arrayValue<LogEntryError>(entity.error)
+					? BaseError.expand(entity.error)
+					: undefined,
 				data: entity.data
 			});
 		}
