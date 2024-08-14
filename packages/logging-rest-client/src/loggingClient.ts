@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0.
 import { BaseRestClient } from "@gtsc/api-core";
 import type { IBaseRestClientConfig, IOkResponse } from "@gtsc/api-models";
-import { Guards, StringHelper } from "@gtsc/core";
+import { Guards } from "@gtsc/core";
 import type {
 	ILogEntry,
 	ILoggingComponent,
@@ -33,7 +33,7 @@ export class LoggingClient extends BaseRestClient implements ILoggingComponent {
 	 * @param config The configuration for the client.
 	 */
 	constructor(config: IBaseRestClientConfig) {
-		super(LoggingClient._CLASS_NAME, config, StringHelper.kebabCase(nameof<ILoggingComponent>()));
+		super(LoggingClient._CLASS_NAME, config, "logging");
 	}
 
 	/**
