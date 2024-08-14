@@ -1,15 +1,15 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import type { IService } from "@gtsc/services";
+import type { IComponent } from "@gtsc/core";
 import type { ILogEntry } from "./ILogEntry";
 import type { LogLevel } from "./logLevel";
 
 /**
  * Interface describing a logging contract.
  */
-export interface ILogging extends IService {
+export interface ILoggingComponent extends IComponent {
 	/**
-	 * Log an entry to the service.
+	 * Log an entry to the component.
 	 * @param logEntry The entry to log.
 	 * @returns Nothing.
 	 */

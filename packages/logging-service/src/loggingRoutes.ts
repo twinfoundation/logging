@@ -1,15 +1,14 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import type { IHttpRequestContext, INoContentResponse, IRestRoute, ITag } from "@gtsc/api-models";
-import { Coerce, Guards } from "@gtsc/core";
+import { ComponentFactory, Coerce, Guards } from "@gtsc/core";
 import type {
-	ILogging,
+	ILoggingComponent,
 	ILoggingCreateRequest,
 	ILoggingListRequest,
 	ILoggingListResponse
 } from "@gtsc/logging-models";
 import { nameof } from "@gtsc/nameof";
-import { ServiceFactory } from "@gtsc/services";
 import { HttpStatusCode } from "@gtsc/web";
 
 /**
@@ -30,12 +29,12 @@ export const tagsLogging: ITag[] = [
 /**
  * The REST routes for logging.
  * @param baseRouteName Prefix to prepend to the paths.
- * @param factoryServiceName The name of the service to use in the routes store in the ServiceFactory.
+ * @param componentName The name of the component to use in the routes stored in the ComponentFactory.
  * @returns The generated routes.
  */
 export function generateRestRoutesLogging(
 	baseRouteName: string,
-	factoryServiceName: string
+	componentName: string
 ): IRestRoute[] {
 	const createRoute: IRestRoute<ILoggingCreateRequest, INoContentResponse> = {
 		operationId: "loggingEntryCreate",
@@ -44,7 +43,7 @@ export function generateRestRoutesLogging(
 		method: "POST",
 		path: `${baseRouteName}/`,
 		handler: async (httpRequestContext, request) =>
-			loggingCreate(httpRequestContext, factoryServiceName, request),
+			loggingCreate(httpRequestContext, componentName, request),
 		requestType: {
 			type: nameof<ILoggingCreateRequest>(),
 			examples: [
@@ -93,7 +92,7 @@ export function generateRestRoutesLogging(
 		method: "GET",
 		path: `${baseRouteName}/`,
 		handler: async (httpRequestContext, request) =>
-			loggingList(httpRequestContext, factoryServiceName, request),
+			loggingList(httpRequestContext, componentName, request),
 		requestType: {
 			type: nameof<ILoggingListRequest>(),
 			examples: [
@@ -140,19 +139,19 @@ export function generateRestRoutesLogging(
 /**
  * Create a new log entry.
  * @param httpRequestContext The request context for the API.
- * @param factoryServiceName The name of the service to use in the routes.
+ * @param componentName The name of the component to use in the routes.
  * @param request The request.
  * @returns The response object with additional http response properties.
  */
 export async function loggingCreate(
 	httpRequestContext: IHttpRequestContext,
-	factoryServiceName: string,
+	componentName: string,
 	request: ILoggingCreateRequest
 ): Promise<INoContentResponse> {
 	Guards.object<ILoggingCreateRequest>(ROUTES_SOURCE, nameof(request), request);
 	Guards.object<ILoggingCreateRequest["body"]>(ROUTES_SOURCE, nameof(request.body), request.body);
-	const service = ServiceFactory.get<ILogging>(factoryServiceName);
-	await service.log(request.body);
+	const component = ComponentFactory.get<ILoggingComponent>(componentName);
+	await component.log(request.body);
 	return {
 		statusCode: HttpStatusCode.noContent
 	};
@@ -161,18 +160,18 @@ export async function loggingCreate(
 /**
  * Get a list of the logging entries.
  * @param httpRequestContext The request context for the API.
- * @param factoryServiceName The name of the service to use in the routes.
+ * @param componentName The name of the component to use in the routes.
  * @param request The request.
  * @returns The response object with additional http response properties.
  */
 export async function loggingList(
 	httpRequestContext: IHttpRequestContext,
-	factoryServiceName: string,
+	componentName: string,
 	request: ILoggingListRequest
 ): Promise<ILoggingListResponse> {
-	const service = ServiceFactory.get<ILogging>(factoryServiceName);
+	const component = ComponentFactory.get<ILoggingComponent>(componentName);
 
-	const itemsAndCursor = await service.query(
+	const itemsAndCursor = await component.query(
 		request?.query?.level,
 		request?.query?.source,
 		Coerce.number(request?.query?.timeStart),

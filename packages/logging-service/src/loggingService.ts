@@ -10,7 +10,7 @@ import {
 import {
 	LoggingConnectorFactory,
 	type ILogEntry,
-	type ILogging,
+	type ILoggingComponent,
 	type ILoggingConnector,
 	type LogLevel
 } from "@gtsc/logging-models";
@@ -19,7 +19,7 @@ import { nameof } from "@gtsc/nameof";
 /**
  * Service for performing logging operations to a connector.
  */
-export class LoggingService implements ILogging {
+export class LoggingService implements ILoggingComponent {
 	/**
 	 * Runtime name for the class.
 	 */

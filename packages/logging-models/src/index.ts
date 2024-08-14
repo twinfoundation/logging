@@ -8,7 +8,7 @@ export * from "./models/api/ILoggingCreateRequest";
 export * from "./models/api/ILoggingListRequest";
 export * from "./models/api/ILoggingListResponse";
 export * from "./models/ILogEntry";
-export * from "./models/ILogging";
+export * from "./models/ILoggingComponent";
 export * from "./models/ILoggingConnector";
 export * from "./models/ILoggingLevelsConfig";
 export * from "./models/logLevel";

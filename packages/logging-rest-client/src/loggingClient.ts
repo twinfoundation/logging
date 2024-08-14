@@ -5,7 +5,7 @@ import type { IBaseRestClientConfig, IOkResponse } from "@gtsc/api-models";
 import { Guards, StringHelper } from "@gtsc/core";
 import type {
 	ILogEntry,
-	ILogging,
+	ILoggingComponent,
 	ILoggingCreateRequest,
 	ILoggingListRequest,
 	ILoggingListResponse,
@@ -16,7 +16,7 @@ import { nameof } from "@gtsc/nameof";
 /**
  * Client for performing logging through to REST endpoints.
  */
-export class LoggingClient extends BaseRestClient implements ILogging {
+export class LoggingClient extends BaseRestClient implements ILoggingComponent {
 	/**
 	 * Runtime name for the class.
 	 * @internal
@@ -33,7 +33,7 @@ export class LoggingClient extends BaseRestClient implements ILogging {
 	 * @param config The configuration for the client.
 	 */
 	constructor(config: IBaseRestClientConfig) {
-		super(LoggingClient._CLASS_NAME, config, StringHelper.kebabCase(nameof<ILogging>()));
+		super(LoggingClient._CLASS_NAME, config, StringHelper.kebabCase(nameof<ILoggingComponent>()));
 	}
 
 	/**
