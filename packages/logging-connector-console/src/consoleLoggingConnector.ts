@@ -63,12 +63,13 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * Create a new instance of ConsoleLoggingConnector.
-	 * @param config The configuration for the logging connector.
+	 * @param options The options for the logging connector.
+	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(config?: IConsoleLoggingConnectorConfig) {
-		this._levels = config?.levels ?? ["debug", "info", "warn", "error", "trace"];
-		this._translateMessages = config?.translateMessages ?? false;
-		this._hideGroups = config?.hideGroups ?? false;
+	constructor(options?: { config?: IConsoleLoggingConnectorConfig }) {
+		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
+		this._translateMessages = options?.config?.translateMessages ?? false;
+		this._hideGroups = options?.config?.hideGroups ?? false;
 	}
 
 	/**
