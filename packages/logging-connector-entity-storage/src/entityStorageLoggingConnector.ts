@@ -28,6 +28,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * The log levels to capture, will default to all.
+	 * @internal
 	 */
 	private readonly _levels: LogLevel[];
 

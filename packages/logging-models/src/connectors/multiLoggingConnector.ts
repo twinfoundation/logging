@@ -25,11 +25,13 @@ export class MultiLoggingConnector implements ILoggingConnector {
 
 	/**
 	 * The connectors to send the log entries to.
+	 * @internal
 	 */
 	private readonly _loggingConnectors: ILoggingConnector[];
 
 	/**
 	 * The log levels to display, will default to all.
+	 * @internal
 	 */
 	private readonly _levels: LogLevel[];
 

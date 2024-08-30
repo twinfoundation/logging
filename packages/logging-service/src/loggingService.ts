@@ -98,7 +98,7 @@ export class LoggingService implements ILoggingComponent {
 		if (Is.stringValue(level)) {
 			condition.conditions.push({
 				property: "level",
-				operator: ComparisonOperator.Equals,
+				comparison: ComparisonOperator.Equals,
 				value: level
 			});
 		}
@@ -106,7 +106,7 @@ export class LoggingService implements ILoggingComponent {
 		if (Is.stringValue(source)) {
 			condition.conditions.push({
 				property: "source",
-				operator: ComparisonOperator.Equals,
+				comparison: ComparisonOperator.Equals,
 				value: source
 			});
 		}
@@ -114,7 +114,7 @@ export class LoggingService implements ILoggingComponent {
 		if (Is.number(timeStart)) {
 			condition.conditions.push({
 				property: "ts",
-				operator: ComparisonOperator.GreaterThanOrEqual,
+				comparison: ComparisonOperator.GreaterThanOrEqual,
 				value: timeStart
 			});
 		}
@@ -122,7 +122,7 @@ export class LoggingService implements ILoggingComponent {
 		if (Is.number(timeEnd)) {
 			condition.conditions.push({
 				property: "ts",
-				operator: ComparisonOperator.LessThanOrEqual,
+				comparison: ComparisonOperator.LessThanOrEqual,
 				value: timeEnd
 			});
 		}

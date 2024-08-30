@@ -144,7 +144,9 @@
                         "description": "The level of the log entries to retrieve.",
                         "in": "query",
                         "required": false,
-                        "schema": {},
+                        "schema": {
+                            "$ref": "#/components/schemas/LogLevel"
+                        },
                         "example": "info"
                     },
                     {
