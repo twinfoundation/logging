@@ -81,14 +81,6 @@ export class LoggingService implements ILoggingComponent {
 		 * An optional cursor, when defined can be used to call find to get more entities.
 		 */
 		cursor?: string;
-		/**
-		 * Number of entities to return.
-		 */
-		pageSize?: number;
-		/**
-		 * Total entities length.
-		 */
-		totalEntities: number;
 	}> {
 		const condition: EntityCondition<Omit<ILogEntry, "error" | "data">> = {
 			conditions: [],
@@ -142,9 +134,7 @@ export class LoggingService implements ILoggingComponent {
 
 		return {
 			entities: result.entities as ILogEntry[],
-			cursor: result.cursor,
-			pageSize: result.pageSize,
-			totalEntities: result.totalEntities
+			cursor: result.cursor
 		};
 	}
 }

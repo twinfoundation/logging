@@ -103,14 +103,6 @@ export class MultiLoggingConnector implements ILoggingConnector {
 		 * An optional cursor, when defined can be used to call find to get more entities.
 		 */
 		cursor?: string;
-		/**
-		 * Number of entities to return.
-		 */
-		pageSize?: number;
-		/**
-		 * Total entities length.
-		 */
-		totalEntities: number;
 	}> {
 		// See if we can find a connector that supports querying.
 		// If it throws anything other than not implemented, we should throw it.

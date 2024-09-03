@@ -108,14 +108,6 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 		 * An optional cursor, when defined can be used to call find to get more entities.
 		 */
 		cursor?: string;
-		/**
-		 * Number of entities to return.
-		 */
-		pageSize?: number;
-		/**
-		 * Total entities length.
-		 */
-		totalEntities: number;
 	}> {
 		const result = await this._logEntryStorage.query(
 			conditions as EntityCondition<LogEntry>,
@@ -142,9 +134,7 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 
 		return {
 			entities: mappedEntities,
-			cursor: result.cursor,
-			pageSize: result.pageSize,
-			totalEntities: result.totalEntities
+			cursor: result.cursor
 		};
 	}
 }
