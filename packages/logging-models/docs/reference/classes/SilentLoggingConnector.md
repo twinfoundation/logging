@@ -34,7 +34,7 @@ Runtime name for the class.
 
 #### Implementation of
 
-[`ILoggingConnector`](../interfaces/ILoggingConnector.md).[`CLASS_NAME`](../interfaces/ILoggingConnector.md#class_name)
+`ILoggingConnector.CLASS_NAME`
 
 ## Methods
 
