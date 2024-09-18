@@ -1,4 +1,4 @@
-# @gtsc/logging-connector-console
+# @twin.org/logging-connector-console
 
 ## Classes
 

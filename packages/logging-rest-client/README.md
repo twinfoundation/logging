@@ -1,11 +1,11 @@
-# GTSC Logging REST Client
+# TWIN Logging REST Client
 
 Logging contract implementation which can connect to REST endpoints.
 
 ## Installation
 
 ```shell
-npm install @gtsc/logging-rest-client
+npm install @twin.org/logging-rest-client
 ```
 
 ## Examples
@@ -14,7 +14,7 @@ Usage of the APIs is shown in the examples [docs/examples.md](docs/examples.md)
 
 ## Reference
 
-Detailed reference documentation for the API can be found in [docs/reference/globals.md](docs/reference/globals.md)
+Detailed reference documentation for the API can be found in [docs/reference/index.md](docs/reference/index.md)
 
 ## Changelog
 

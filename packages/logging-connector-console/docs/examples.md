@@ -1,1 +1,1 @@
-# @gtsc/logging-connector-console - Examples
+# @twin.org/logging-connector-console - Examples

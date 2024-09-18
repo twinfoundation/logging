@@ -1,4 +1,4 @@
-# @gtsc/logging-rest-client
+# @twin.org/logging-rest-client
 
 ## Classes
 

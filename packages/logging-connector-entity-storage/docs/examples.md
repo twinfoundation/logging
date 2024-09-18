@@ -1,1 +1,1 @@
-# @gtsc/logging-connector-entity-storage - Examples
+# @twin.org/logging-connector-entity-storage - Examples

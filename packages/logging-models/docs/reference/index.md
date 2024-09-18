@@ -1,4 +1,4 @@
-# @gtsc/logging-models
+# @twin.org/logging-models
 
 ## Classes
 

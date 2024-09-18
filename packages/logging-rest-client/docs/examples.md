@@ -1,1 +1,1 @@
-# @gtsc/logging-rest-client - Examples
+# @twin.org/logging-rest-client - Examples

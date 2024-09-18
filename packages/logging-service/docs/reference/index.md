@@ -1,4 +1,4 @@
-# @gtsc/logging-service
+# @twin.org/logging-service
 
 ## Classes
 

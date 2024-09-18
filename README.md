@@ -1,6 +1,6 @@
-# GTSC Logging
+# TWIN Logging
 
-This mono-repository contains the packages to use with logging in GTSC applications.
+This mono-repository contains the packages to use with logging in TWIN applications.
 
 ## Packages
 

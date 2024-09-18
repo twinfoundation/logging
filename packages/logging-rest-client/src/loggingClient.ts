@@ -1,8 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseRestClient } from "@gtsc/api-core";
-import type { IBaseRestClientConfig, IOkResponse } from "@gtsc/api-models";
-import { Guards } from "@gtsc/core";
+import { BaseRestClient } from "@twin.org/api-core";
+import type { IBaseRestClientConfig, IOkResponse } from "@twin.org/api-models";
+import { Guards } from "@twin.org/core";
 import type {
 	ILogEntry,
 	ILoggingComponent,
@@ -10,8 +10,8 @@ import type {
 	ILoggingListRequest,
 	ILoggingListResponse,
 	LogLevel
-} from "@gtsc/logging-models";
-import { nameof } from "@gtsc/nameof";
+} from "@twin.org/logging-models";
+import { nameof } from "@twin.org/nameof";
 
 /**
  * Client for performing logging through to REST endpoints.

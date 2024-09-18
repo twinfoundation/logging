@@ -32,7 +32,7 @@ The configuration for the logging connector.
 
 ### NAMESPACE
 
-> `static` `readonly` **NAMESPACE**: `string` = `"console"`
+> `readonly` `static` **NAMESPACE**: `string` = `"console"`
 
 The namespace for the logging connector.
 
@@ -121,10 +121,10 @@ The entities, which can be partial if a limited keys list was provided.
 
 An optional cursor, when defined can be used to call find to get more entities.
 
-#### Implementation of
-
-`ILoggingConnector.query`
-
 #### Throws
 
 NotImplementedError if the implementation does not support retrieval.
+
+#### Implementation of
+
+`ILoggingConnector.query`
