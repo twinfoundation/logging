@@ -1,5 +1,5 @@
-# @gtsc/logging-connector-console - Changelog
+# @twin.org/logging-connector-console - Changelog
 
-## v0.0.3
+## v0.0.1-next.3
 
 - Initial Release

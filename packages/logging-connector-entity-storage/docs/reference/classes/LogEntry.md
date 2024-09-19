@@ -68,6 +68,6 @@ Associated error data.
 
 Data for the message.
 
-#### Index signature
+#### Index Signature
 
  \[`key`: `string`\]: `unknown`

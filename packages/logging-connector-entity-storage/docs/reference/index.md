@@ -1,4 +1,4 @@
-# @gtsc/logging-connector-entity-storage
+# @twin.org/logging-connector-entity-storage
 
 ## Classes
 

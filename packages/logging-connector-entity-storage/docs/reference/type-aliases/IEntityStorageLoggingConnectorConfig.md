@@ -1,4 +1,4 @@
-# Type alias: IEntityStorageLoggingConnectorConfig
+# Type Alias: IEntityStorageLoggingConnectorConfig
 
 > **IEntityStorageLoggingConnectorConfig**: `ILoggingLevelsConfig`
 

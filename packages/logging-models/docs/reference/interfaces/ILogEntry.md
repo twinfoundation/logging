@@ -50,6 +50,6 @@ Optional error details.
 
 Optional data for the message.
 
-#### Index signature
+#### Index Signature
 
  \[`key`: `string`\]: `unknown`

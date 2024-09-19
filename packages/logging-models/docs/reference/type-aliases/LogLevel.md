@@ -1,4 +1,4 @@
-# Type alias: LogLevel
+# Type Alias: LogLevel
 
 > **LogLevel**: `"info"` \| `"error"` \| `"warn"` \| `"trace"` \| `"debug"`
 

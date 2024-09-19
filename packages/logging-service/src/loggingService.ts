@@ -1,20 +1,20 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Guards, Is } from "@gtsc/core";
+import { Guards, Is } from "@twin.org/core";
 import {
 	ComparisonOperator,
 	LogicalOperator,
 	SortDirection,
 	type EntityCondition
-} from "@gtsc/entity";
+} from "@twin.org/entity";
 import {
 	LoggingConnectorFactory,
 	type ILogEntry,
 	type ILoggingComponent,
 	type ILoggingConnector,
 	type LogLevel
-} from "@gtsc/logging-models";
-import { nameof } from "@gtsc/nameof";
+} from "@twin.org/logging-models";
+import { nameof } from "@twin.org/nameof";
 
 /**
  * Service for performing logging operations to a connector.
