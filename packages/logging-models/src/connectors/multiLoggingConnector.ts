@@ -41,10 +41,7 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * @param options.loggingConnectorTypes The logging connectors to multiplex.
 	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(options: {
-		loggingConnectorTypes: string[];
-		config?: ILoggingLevelsConfig | undefined;
-	}) {
+	constructor(options: { loggingConnectorTypes: string[]; config?: ILoggingLevelsConfig }) {
 		Guards.object(this.CLASS_NAME, nameof(options), options);
 		Guards.arrayValue(
 			this.CLASS_NAME,
