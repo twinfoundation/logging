@@ -81,16 +81,18 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 		Guards.object<ILogEntry>(this.CLASS_NAME, nameof(logEntry), logEntry);
 
 		if (this._levels.includes(logEntry.level)) {
-			if (!this._hideGroups) {
-				this.handleGroup(logEntry.source);
-			}
-
 			logEntry.ts ??= Date.now();
 
 			const params: unknown[] = [
 				this.colorize(logEntry.level.toUpperCase(), logEntry.level === "error" ? "red" : "green"),
 				this.colorize(`[${new Date(logEntry.ts).toISOString()}]`, "magenta")
 			];
+
+			if (!this._hideGroups) {
+				this.handleGroup(logEntry.source);
+			} else {
+				params.push(this.colorize(logEntry.source, "blue"));
+			}
 
 			let message = logEntry.message;
 			let data = logEntry.data;
