@@ -6,7 +6,7 @@ import { nameof } from "@twin.org/nameof";
 import { LoggingConnectorFactory } from "../factories/loggingConnectorFactory";
 import type { ILogEntry } from "../models/ILogEntry";
 import type { ILoggingConnector } from "../models/ILoggingConnector";
-import type { ILoggingLevelsConfig } from "../models/ILoggingLevelsConfig";
+import type { IMultiLoggingConnectorConstructorOptions } from "../models/IMultiLoggingConnectorConstructorOptions";
 import type { LogLevel } from "../models/logLevel";
 
 /**
@@ -38,10 +38,8 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	/**
 	 * Create a new instance of MultiLoggingConnector.
 	 * @param options The options for the connector.
-	 * @param options.loggingConnectorTypes The logging connectors to multiplex.
-	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(options: { loggingConnectorTypes: string[]; config?: ILoggingLevelsConfig }) {
+	constructor(options: IMultiLoggingConnectorConstructorOptions) {
 		Guards.object(this.CLASS_NAME, nameof(options), options);
 		Guards.arrayValue(
 			this.CLASS_NAME,

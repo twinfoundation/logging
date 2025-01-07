@@ -15,6 +15,7 @@ import {
 	type LogLevel
 } from "@twin.org/logging-models";
 import { nameof } from "@twin.org/nameof";
+import type { ILoggingServiceConstructorOptions } from "./models/ILoggingServiceConstructorOptions";
 
 /**
  * Service for performing logging operations to a connector.
@@ -39,9 +40,8 @@ export class LoggingService implements ILoggingComponent {
 	/**
 	 * Create a new instance of LoggingService.
 	 * @param options The options for the connector.
-	 * @param options.loggingConnectorType The type of the logging connector to use, defaults to "logging".
 	 */
-	constructor(options?: { loggingConnectorType?: string }) {
+	constructor(options?: ILoggingServiceConstructorOptions) {
 		this._loggingConnector = LoggingConnectorFactory.get(
 			options?.loggingConnectorType ?? "logging"
 		);

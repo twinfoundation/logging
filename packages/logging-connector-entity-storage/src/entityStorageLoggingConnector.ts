@@ -10,7 +10,7 @@ import type { ILogEntry, ILoggingConnector, LogLevel } from "@twin.org/logging-m
 import { nameof } from "@twin.org/nameof";
 import type { LogEntry } from "./entities/logEntry";
 import type { LogEntryError } from "./entities/logEntryError";
-import type { IEntityStorageLoggingConnectorConfig } from "./models/IEntityStorageLoggingConnectorConfig";
+import type { IEntityStorageLoggingConnectorConstructorOptions } from "./models/IEntityStorageLoggingConnectorConstructorOptions";
 
 /**
  * Class for performing logging operations in entity storage.
@@ -41,13 +41,8 @@ export class EntityStorageLoggingConnector implements ILoggingConnector {
 	/**
 	 * Create a new instance of EntityStorageLoggingConnector.
 	 * @param options The options for the connector.
-	 * @param options.logEntryStorageConnectorType The type of the entity storage connector to use, defaults to "log-entry".
-	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(options?: {
-		logEntryStorageConnectorType?: string;
-		config?: IEntityStorageLoggingConnectorConfig;
-	}) {
+	constructor(options?: IEntityStorageLoggingConnectorConstructorOptions) {
 		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
 		this._logEntryStorage = EntityStorageConnectorFactory.get(
 			options?.logEntryStorageConnectorType ?? "log-entry"

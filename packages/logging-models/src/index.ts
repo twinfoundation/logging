@@ -11,4 +11,5 @@ export * from "./models/ILogEntry";
 export * from "./models/ILoggingComponent";
 export * from "./models/ILoggingConnector";
 export * from "./models/ILoggingLevelsConfig";
+export * from "./models/IMultiLoggingConnectorConstructorOptions";
 export * from "./models/logLevel";

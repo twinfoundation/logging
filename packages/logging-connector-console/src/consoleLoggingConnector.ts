@@ -9,7 +9,7 @@ import {
 	type LogLevel
 } from "@twin.org/logging-models";
 import { nameof } from "@twin.org/nameof";
-import type { IConsoleLoggingConnectorConfig } from "./models/IConsoleLoggingConnectorConfig";
+import type { IConsoleLoggingConnectorConstructorOptions } from "./models/IConsoleLoggingConnectorConstructorOptions";
 
 /**
  * Class for performing logging operations in the console.
@@ -64,9 +64,8 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 	/**
 	 * Create a new instance of ConsoleLoggingConnector.
 	 * @param options The options for the logging connector.
-	 * @param options.config The configuration for the logging connector.
 	 */
-	constructor(options?: { config?: IConsoleLoggingConnectorConfig }) {
+	constructor(options?: IConsoleLoggingConnectorConstructorOptions) {
 		this._levels = options?.config?.levels ?? ["debug", "info", "warn", "error", "trace"];
 		this._translateMessages = options?.config?.translateMessages ?? false;
 		this._hideGroups = options?.config?.hideGroups ?? false;
