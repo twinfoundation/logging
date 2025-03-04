@@ -42,12 +42,12 @@ export class LogEntry {
 	/**
 	 * Associated error data.
 	 */
-	@property({ type: "array", itemType: "object", itemTypeRef: "LogEntryError" })
+	@property({ type: "array", itemType: "object", itemTypeRef: "LogEntryError", optional: true })
 	public error?: LogEntryError[];
 
 	/**
 	 * Data for the message.
 	 */
-	@property({ type: "object" })
+	@property({ type: "object", optional: true })
 	public data?: { [key: string]: unknown };
 }
