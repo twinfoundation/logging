@@ -22,13 +22,13 @@ export class LogEntryError {
 	/**
 	 * The source of the error.
 	 */
-	@property({ type: "string" })
+	@property({ type: "string", optional: true })
 	public source?: string;
 
 	/**
 	 * Any additional information for the error.
 	 */
-	@property({ type: "object" })
+	@property({ type: "object", optional: true })
 	public properties?: {
 		[id: string]: unknown;
 	};
@@ -36,6 +36,6 @@ export class LogEntryError {
 	/**
 	 * The stack trace for the error.
 	 */
-	@property({ type: "string" })
+	@property({ type: "string", optional: true })
 	public stack?: string;
 }
