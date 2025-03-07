@@ -1,7 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { Guards, Is, NotImplementedError } from "@twin.org/core";
-import type { EntityCondition, SortDirection } from "@twin.org/entity";
+import { Guards, Is } from "@twin.org/core";
 import {
 	LogEntryHelper,
 	type ILogEntry,
@@ -120,39 +119,6 @@ export class ConsoleLoggingConnector implements ILoggingConnector {
 
 			globalThis.console[logEntry.level](...params);
 		}
-	}
-
-	/**
-	 * Query the log entries.
-	 * @param conditions The conditions to match for the entities.
-	 * @param sortProperties The optional sort order.
-	 * @param properties The optional keys to return, defaults to all.
-	 * @param cursor The cursor to request the next page of entities.
-	 * @param pageSize The maximum number of entities in a page.
-	 * @returns All the entities for the storage matching the conditions,
-	 * and a cursor which can be used to request more entities.
-	 * @throws NotImplementedError if the implementation does not support retrieval.
-	 */
-	public async query(
-		conditions?: EntityCondition<ILogEntry>,
-		sortProperties?: {
-			property: keyof Omit<ILogEntry, "error" | "data">;
-			sortDirection: SortDirection;
-		}[],
-		properties?: (keyof ILogEntry)[],
-		cursor?: string,
-		pageSize?: number
-	): Promise<{
-		/**
-		 * The entities, which can be partial if a limited keys list was provided.
-		 */
-		entities: Partial<ILogEntry>[];
-		/**
-		 * An optional cursor, when defined can be used to call find to get more entities.
-		 */
-		cursor?: string;
-	}> {
-		throw new NotImplementedError(this.CLASS_NAME, "query");
 	}
 
 	/**

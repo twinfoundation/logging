@@ -24,9 +24,8 @@ export interface ILoggingConnector extends IComponent {
 	 * @param pageSize The maximum number of entities in a page.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
-	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
-	query(
+	query?(
 		conditions?: EntityCondition<ILogEntry>,
 		sortProperties?: {
 			property: keyof Omit<ILogEntry, "error" | "data">;

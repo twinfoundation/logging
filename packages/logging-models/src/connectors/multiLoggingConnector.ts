@@ -1,6 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
-import { BaseError, Guards, NotImplementedError } from "@twin.org/core";
+import { Guards, Is } from "@twin.org/core";
 import type { EntityCondition, SortDirection } from "@twin.org/entity";
 import { nameof } from "@twin.org/nameof";
 import { LoggingConnectorFactory } from "../factories/loggingConnectorFactory";
@@ -78,7 +78,6 @@ export class MultiLoggingConnector implements ILoggingConnector {
 	 * @param pageSize The maximum number of entities in a page.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
-	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
 		conditions?: EntityCondition<ILogEntry>,
@@ -102,22 +101,14 @@ export class MultiLoggingConnector implements ILoggingConnector {
 		// See if we can find a connector that supports querying.
 		// If it throws anything other than not implemented, we should throw it.
 		for (const loggingConnector of this._loggingConnectors) {
-			try {
-				const result = await loggingConnector.query(
-					conditions,
-					sortProperties,
-					properties,
-					cursor,
-					pageSize
-				);
-				return result;
-			} catch (error) {
-				if (!BaseError.isErrorName(error, NotImplementedError.CLASS_NAME)) {
-					throw error;
-				}
+			// eslint-disable-next-line @typescript-eslint/unbound-method
+			if (Is.function(loggingConnector.query)) {
+				return loggingConnector.query(conditions, sortProperties, properties, cursor, pageSize);
 			}
 		}
 
-		throw new NotImplementedError(this.CLASS_NAME, "query");
+		return {
+			entities: []
+		};
 	}
 }

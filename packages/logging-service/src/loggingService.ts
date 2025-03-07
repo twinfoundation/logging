@@ -68,7 +68,6 @@ export class LoggingService implements ILoggingComponent {
 	 * @param pageSize The maximum number of entities in a page.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
-	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
 		level?: LogLevel,
@@ -124,22 +123,18 @@ export class LoggingService implements ILoggingComponent {
 			});
 		}
 
-		const result = await this._loggingConnector.query(
-			condition,
-			[
-				{
-					property: "ts",
-					sortDirection: SortDirection.Descending
-				}
-			],
-			undefined,
-			cursor,
-			pageSize
-		);
+		if (Is.function(this._loggingConnector?.query)) {
+			const result = await this._loggingConnector.query(
+				condition,
+				[{ property: "ts", sortDirection: SortDirection.Descending }],
+				undefined,
+				cursor,
+				pageSize
+			);
 
-		return {
-			entities: result.entities as ILogEntry[],
-			cursor: result.cursor
-		};
+			return { entities: result.entities as ILogEntry[], cursor: result.cursor };
+		}
+
+		return { entities: [] };
 	}
 }

@@ -59,7 +59,6 @@ export class LoggingClient extends BaseRestClient implements ILoggingComponent {
 	 * @param pageSize The maximum number of entities in a page.
 	 * @returns All the entities for the storage matching the conditions,
 	 * and a cursor which can be used to request more entities.
-	 * @throws NotImplementedError if the implementation does not support retrieval.
 	 */
 	public async query(
 		level?: LogLevel,
