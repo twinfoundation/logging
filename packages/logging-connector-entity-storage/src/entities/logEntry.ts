@@ -30,7 +30,7 @@ export class LogEntry {
 	/**
 	 * The timestamp of the log entry.
 	 */
-	@property({ type: "integer", sortDirection: SortDirection.Descending })
+	@property({ type: "integer", format: "uint64", sortDirection: SortDirection.Descending })
 	public ts!: number;
 
 	/**
