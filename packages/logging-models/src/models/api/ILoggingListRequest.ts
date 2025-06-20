@@ -9,7 +9,7 @@ export interface ILoggingListRequest {
 	/**
 	 * The query parameters.
 	 */
-	query: {
+	query?: {
 		/**
 		 * The level of the log entries to retrieve.
 		 */
@@ -23,12 +23,12 @@ export interface ILoggingListRequest {
 		/**
 		 * The start time of the metrics to retrieve as a timestamp in ms.
 		 */
-		timeStart?: number;
+		timeStart?: number | string;
 
 		/**
 		 * The end time of the metrics to retrieve as a timestamp in ms.
 		 */
-		timeEnd?: number;
+		timeEnd?: number | string;
 
 		/**
 		 * The optional cursor to get next chunk.
@@ -38,6 +38,6 @@ export interface ILoggingListRequest {
 		/**
 		 * The maximum number of entities in a page.
 		 */
-		pageSize?: number;
+		pageSize?: number | string;
 	};
 }
