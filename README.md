@@ -1,11 +1,14 @@
-# GTSC / Logging
+# TWIN Logging
 
-This mono-repository contains the packages to use with Logging in GTSC applications.
+This mono-repository contains the packages to use with logging in TWIN applications.
 
 ## Packages
 
-- [logging-provider-models](packages/logging-provider-models/README.md) - Models which define the structure of the logging provider implementations.
-- [logging-provider-console](packages/logging-provider-console/README.md) - Logging provider implementation using the console.
+- [logging-models](packages/logging-models/README.md) - Models which define the structure of the logging contracts and connectors.
+- [logging-connector-console](packages/logging-connector-console/README.md) - Logging connector implementation using the console.
+- [logging-connector-entity-storage](packages/logging-connector-entity-storage/README.md) - Logging connector implementation using entity storage.
+- [logging-service](packages/logging-service/README.md) - Logging contract implementation and REST endpoint definitions.
+- [logging-rest-client](packages/logging-rest-client/README.md) - Logging contract implementation which can connect to REST endpoints.
 
 ## Contributing
 
