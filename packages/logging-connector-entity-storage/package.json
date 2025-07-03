@@ -1,6 +1,6 @@
 {
 	"name": "@twin.org/logging-connector-entity-storage",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Logging connector implementation using entity storage",
 	"repository": {
 		"type": "git",
@@ -33,7 +33,7 @@
 		"@twin.org/core": "^0.0.1",
 		"@twin.org/entity": "^0.0.1",
 		"@twin.org/nameof": "^0.0.1",
-		"@twin.org/logging-models": "^0.0.0"
+		"@twin.org/logging-models": "^0.0.1"
 	},
 	"peerDependencies": {
 		"@twin.org/entity-storage-models": ">= 0.0.1-next.2",
