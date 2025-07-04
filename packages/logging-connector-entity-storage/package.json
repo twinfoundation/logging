@@ -32,12 +32,10 @@
 	"dependencies": {
 		"@twin.org/core": "next",
 		"@twin.org/entity": "next",
+		"@twin.org/entity-storage-models": "next",
+		"@twin.org/entity-storage-connector-memory": "next",
 		"@twin.org/nameof": "next",
 		"@twin.org/logging-models": "0.0.2-next.0"
-	},
-	"peerDependencies": {
-		"@twin.org/entity-storage-models": ">= 0.0.1-next.31",
-		"@twin.org/entity-storage-connector-memory": ">= 0.0.1-next.31"
 	},
 	"devDependencies": {
 		"@twin.org/nameof-transformer": "next",
