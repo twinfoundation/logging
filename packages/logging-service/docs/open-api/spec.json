@@ -384,6 +384,7 @@
 				"properties": {
 					"entities": {
 						"type": "array",
+						"items": false,
 						"description": "The entities, which can be partial if a limited keys list was provided.",
 						"prefixItems": [
 							{
