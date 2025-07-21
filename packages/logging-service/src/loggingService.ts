@@ -22,11 +22,6 @@ import type { ILoggingServiceConstructorOptions } from "./models/ILoggingService
  */
 export class LoggingService implements ILoggingComponent {
 	/**
-	 * The namespace for the logging component.
-	 */
-	public static readonly NAMESPACE: string = "logging";
-
-	/**
 	 * Runtime name for the class.
 	 */
 	public readonly CLASS_NAME: string = nameof<LoggingService>();
